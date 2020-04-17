@@ -202,6 +202,7 @@ var parseGettext = function parseGettext(locale, data) {
     if (options.poRevisionDate && typeof options.poRevisionDate.toISOString === 'function') out.headers['po-revision-date'] = options.poRevisionDate.toISOString();
   }
 
+  out.headers.language = locale;
   if (options.language) out.headers.language = options.language;
   var delkeys = [];
   Object.keys(data).forEach(function (m) {
@@ -680,8 +681,8 @@ var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function po2i18next(fileContents, charset, options) {
-  var js = (0, _po2js["default"])(fileContents, charset);
+function po2i18next(fileContents, options) {
+  var js = (0, _po2js["default"])(fileContents, options);
   return (0, _js2i18next["default"])(js, options);
 }
 
@@ -698,8 +699,8 @@ var _poParser = _interopRequireDefault(require("./poParser.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function po2js(fileContents, charset) {
-  return (0, _poParser["default"])(fileContents, charset);
+function po2js(fileContents, options) {
+  return (0, _poParser["default"])(fileContents, options);
 }
 
 module.exports = exports.default;
@@ -893,6 +894,7 @@ function _default() {
   var table = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   table.translations = table.translations || {};
+  options.project = options.project || 'gettext-converter';
   var _table$headers = table.headers,
       headers = _table$headers === void 0 ? {} : _table$headers;
   headers = Object.keys(headers).reduce(function (result, key) {
@@ -906,6 +908,7 @@ function _default() {
 
     return result;
   }, {});
+  if (!headers[_shared.HEADERS.get('project-id-version')]) headers[_shared.HEADERS.get('project-id-version')] = options.project;
   table.headers = headers;
   if (!('foldLength' in options)) options.foldLength = 76;
   if (!('sort' in options)) options.sort = false;
@@ -1325,18 +1328,26 @@ var finalize = function finalize(tokens, charset) {
 
 
 function _default(fileContents) {
-  var charset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'iso-8859-1';
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  if (typeof options === 'string') {
+    options = {
+      charset: options
+    };
+  }
+
+  options.charset = options.charset || 'iso-8859-1';
 
   if (typeof fileContents === 'string') {
-    charset = 'utf-8';
+    options.charset = 'utf-8';
   } else {
     var ret = handleCharset(fileContents);
-    charset = ret.charset;
+    options.charset = ret.charset;
     fileContents = ret.fileContents;
   }
 
   var lex = lexer(fileContents);
-  return finalize(lex, charset);
+  return finalize(lex, options.charset);
 }
 
 module.exports = exports.default;

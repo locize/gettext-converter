@@ -37,3 +37,19 @@ test('i18next2po', (fn) => () => {
   })
   expect(res).to.eql(fixtures.example.poi18next)
 })
+
+describe('i18nextOptions', () => {
+  test('i18next2po', (fn) => () => {
+    const res = fn('en', fixtures.example_persistMsgIdPlural.jsi18next, {
+      project: 'locize',
+      noDate: true,
+      ctxSeparator: '_ is default but we set it to something that is never found!!!'
+    })
+    expect(res).to.eql(fixtures.example_persistMsgIdPlural.poi18next)
+  })
+
+  test('po2i18next', (fn) => () => {
+    const res = fn(fixtures.example_persistMsgIdPlural.poi18next, { persistMsgIdPlural: true })
+    expect(res).to.eql(fixtures.example_persistMsgIdPlural.jsi18next)
+  })
+})

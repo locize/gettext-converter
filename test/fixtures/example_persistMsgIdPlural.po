@@ -1,0 +1,16 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: locize\n"
+"mime-version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: en\n"
+
+msgid "tied with% {count} other% {test_one} test"
+msgid_plural "tied with% {count} others% {test_one} test"
+msgstr[0] "à égalité avec% {count} other% {test_one} test"
+msgstr[1] "à égalité avec% {count} others% {test_one} test"
+
+msgid "with_ctx"
+msgstr "hi there"
