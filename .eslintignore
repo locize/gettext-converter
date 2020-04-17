@@ -1,0 +1,7 @@
+/build
+/node_modules
+/cjs
+/dist
+/gettext.js
+/gettext.min.js
+/example
