@@ -164,7 +164,7 @@ var getGettextPluralPosition = function getGettextPluralPosition(ext, suffix) {
 };
 
 var getPluralArray = function getPluralArray(locale, translation) {
-  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split('_')[0].toLowerCase()];
+  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split(/_|-/)[0].toLowerCase()] || _plurals["default"].dev;
 
   var pArray = [];
 
@@ -190,7 +190,7 @@ var parseGettext = function parseGettext(locale, data) {
     translations: {}
   };
 
-  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split('_')[0].toLowerCase()];
+  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split(/_|-/)[0].toLowerCase()] || _plurals["default"].dev;
 
   var trans = {};
   out.headers['plural-forms'] = "nplurals=".concat(ext.numbers.length, "; plural=").concat(ext.plurals);
@@ -403,7 +403,7 @@ var getGettextValues = function getGettextValues(value, locale, targetKey, optio
   var isPlural = !!value.msgid_plural;
   if (!isPlural) return emptyOrObject(targetKey, values[0], options);
 
-  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split('_')[0].toLowerCase()];
+  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split(/_|-/)[0].toLowerCase()] || _plurals["default"].dev;
 
   var gettextValues = {};
 
@@ -1363,7 +1363,7 @@ exports.generateHeader = generateHeader;
 exports.formatCharset = exports.HEADERS = void 0;
 // inspired by https://github.com/smhg/gettext-parser/blob/master/lib/shared.js
 // see https://www.gnu.org/software/gettext/manual/html_node/Header-Entry.html
-var HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms']]);
+var HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
 /**
  * Normalizes charset name. Converts utf8 to utf-8, WIN1257 to windows-1257 etc.
  *

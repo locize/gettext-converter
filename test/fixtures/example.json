@@ -11,7 +11,7 @@
       "Content-Type": "text/plain; charset=utf-8",
       "Content-Transfer-Encoding": "8bit",
       "Plural-Forms": "nplurals=2; plural=(n!=1);",
-      "mime-version": "1.0",
+      "MIME-Version": "1.0",
       "x-poedit-language": "English",
       "x-poedit-country": "United States",
       "x-poedit-sourcecharset": "utf-8"
@@ -24,7 +24,7 @@
                   "translator": "gettext-converter test file.\nCopyright (C) 2020 Fitz Gerald\nThis file is distributed under the same license as the gettext-converter package.\nFitz Gerald <fitz@gerald.com>, 2020.\n"
               },
               "msgstr": [
-                  "Project-Id-Version: gettext-converter\nReport-Msgid-Bugs-To: support@locize.com\nPOT-Creation-Date: 2020-03-18 14:28:00+03:00\nPO-Revision-Date: 2020-03-18 14:37+0300\nLast-Translator: Fitz Gerald <fitz@gerald.com>\nLanguage-Team: gettext-converter <support@locize.com>\nLanguage: en\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n!=1);\nmime-version: 1.0\nx-poedit-language: English\nx-poedit-country: United States\nx-poedit-sourcecharset: utf-8\n"
+                  "Project-Id-Version: gettext-converter\nReport-Msgid-Bugs-To: support@locize.com\nPOT-Creation-Date: 2020-03-18 14:28:00+03:00\nPO-Revision-Date: 2020-03-18 14:37+0300\nLast-Translator: Fitz Gerald <fitz@gerald.com>\nLanguage-Team: gettext-converter <support@locize.com>\nLanguage: en\nContent-Type: text/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n!=1);\nMIME-Version: 1.0\nx-poedit-language: English\nx-poedit-country: United States\nx-poedit-sourcecharset: utf-8\n"
               ]
           },
           "o1": {

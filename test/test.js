@@ -31,7 +31,7 @@ test('po2i18next', (fn) => () => {
 })
 
 test('i18next2po', (fn) => () => {
-  const res = fn('en', fixtures.example.jsi18next, {
+  const res = fn('en-US', fixtures.example.jsi18next, {
     potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
     poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
   })
@@ -40,7 +40,7 @@ test('i18next2po', (fn) => () => {
 
 describe('i18nextOptions', () => {
   test('i18next2po', (fn) => () => {
-    const res = fn('en', fixtures.example_persistMsgIdPlural.jsi18next, {
+    const res = fn('en-US', fixtures.example_persistMsgIdPlural.jsi18next, {
       project: 'locize',
       noDate: true,
       ctxSeparator: '_ is default but we set it to something that is never found!!!'
