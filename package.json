@@ -1,6 +1,6 @@
 {
   "name": "gettext-converter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "po2js and js2po and i18next2po and po2i18next converter gettext resource utils",
   "type": "module",
   "main": "./cjs/index.js",
