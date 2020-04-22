@@ -28,6 +28,24 @@
     "./i18next2po": {
       "require": "./cjs/i18next2po.js",
       "default": "./lib/i18next2po.js"
+    },
+    "./cjs": {
+      "default": "./cjs/index.js"
+    },
+    "./cjs/po2js": {
+      "default": "./cjs/po2js.js"
+    },
+    "./cjs/js2po": {
+      "default": "./cjs/js2po.js"
+    },
+    "./cjs/js2i18next": {
+      "default": "./cjs/js2i18next.js"
+    },
+    "./cjs/po2i18next": {
+      "default": "./cjs/po2i18next.js"
+    },
+    "./cjs/i18next2po": {
+      "default": "./cjs/i18next2po.js"
     }
   },
   "module": "./lib/index.js",
