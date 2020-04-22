@@ -1,3 +1,7 @@
+### 1.0.2
+
+- fix export for dynamic imports
+
 ### 1.0.1
 
 - plurals: dev fallback

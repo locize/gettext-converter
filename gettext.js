@@ -338,6 +338,36 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "po2js", {
+  enumerable: true,
+  get: function get() {
+    return _po2js["default"];
+  }
+});
+Object.defineProperty(exports, "js2po", {
+  enumerable: true,
+  get: function get() {
+    return _js2po["default"];
+  }
+});
+Object.defineProperty(exports, "js2i18next", {
+  enumerable: true,
+  get: function get() {
+    return _js2i18next["default"];
+  }
+});
+Object.defineProperty(exports, "po2i18next", {
+  enumerable: true,
+  get: function get() {
+    return _po2i18next["default"];
+  }
+});
+Object.defineProperty(exports, "i18next2po", {
+  enumerable: true,
+  get: function get() {
+    return _i18next2po["default"];
+  }
+});
 exports["default"] = void 0;
 
 var _po2js = _interopRequireDefault(require("./po2js.js"));
@@ -360,7 +390,6 @@ var _default = {
   i18next2po: _i18next2po["default"]
 };
 exports["default"] = _default;
-module.exports = exports.default;
 },{"./i18next2po.js":2,"./js2i18next.js":4,"./js2po.js":5,"./po2i18next.js":7,"./po2js.js":8}],4:[function(require,module,exports){
 "use strict";
 
