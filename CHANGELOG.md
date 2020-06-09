@@ -1,3 +1,7 @@
+### 1.0.4
+
+- fix plural rules for python
+
 ### 1.0.3
 
 - fix export for node v14 cjs
