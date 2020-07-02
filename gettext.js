@@ -4,7 +4,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports.default = _default;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -18,7 +18,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-// inspired by https://github.com/i18next/i18next-gettext-converter/blob/master/src/lib/flatten.js
 var regexIndexOf = function regexIndexOf(value, regex, startpos) {
   var indexOf = value.substring(startpos || 0).search(regex);
   return indexOf >= 0 ? indexOf + (startpos || 0) : indexOf;
@@ -45,8 +44,7 @@ function _default(input) {
         key = key + keyseparator + m;
       } else {
         key = m;
-      } // get context if used
-
+      }
 
       var pluralIndex = key.indexOf('_plural');
       if (pluralIndex < 0) pluralIndex = regexIndexOf(key, /_\d+$/);
@@ -78,14 +76,12 @@ function _default(input) {
       }
 
       if (context === key) context = '';
-      if (context !== '') key = key.replace(ctxSeparator + context, ''); // append or recurse
-
+      if (context !== '') key = key.replace(ctxSeparator + context, '');
       var appendKey = key + context;
       if (isPlural) appendKey = "".concat(appendKey, "_").concat(number);
 
       if (typeof value === 'string') {
         kv = {
-          // id: key.replace(new RegExp(' ', 'g'), ''),
           key: key,
           value: value,
           isPlural: isPlural,
@@ -95,7 +91,6 @@ function _default(input) {
         appendTo[appendKey] = kv;
       } else if (Array.isArray(value)) {
         kv = {
-          // id: key.replace(new RegExp(' ', 'g'), ''),
           key: key,
           value: value.join('\n'),
           isArray: true,
@@ -110,8 +105,7 @@ function _default(input) {
     });
   }
 
-  recurse(flat, input, ''); // append plurals
-
+  recurse(flat, input, '');
   Object.keys(flat).forEach(function (m) {
     var kv = flat[m];
 
@@ -141,7 +135,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = i18next2po;
+exports.default = i18next2po;
 
 var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
 
@@ -149,7 +143,7 @@ var _flatten = _interopRequireDefault(require("./flatten.js"));
 
 var _plurals = _interopRequireDefault(require("./plurals.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -164,7 +158,7 @@ var getGettextPluralPosition = function getGettextPluralPosition(ext, suffix) {
 };
 
 var getPluralArray = function getPluralArray(locale, translation) {
-  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split(/_|-/)[0].toLowerCase()] || _plurals["default"].dev;
+  var ext = _plurals.default[locale.toLowerCase()] || _plurals.default[locale.split(/_|-/)[0].toLowerCase()] || _plurals.default.dev;
 
   var pArray = [];
 
@@ -190,7 +184,7 @@ var parseGettext = function parseGettext(locale, data) {
     translations: {}
   };
 
-  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split(/_|-/)[0].toLowerCase()] || _plurals["default"].dev;
+  var ext = _plurals.default[locale.toLowerCase()] || _plurals.default[locale.split(/_|-/)[0].toLowerCase()] || _plurals.default.dev;
 
   var trans = {};
   out.headers['plural-forms'] = "nplurals=".concat(ext.numbers.length, "; plural=").concat(ext.plurals);
@@ -224,7 +218,6 @@ var parseGettext = function parseGettext(locale, data) {
 
       if (options.keyasareference) {
         if (_typeof(trans[kv.context][kv.value]) === 'object') {
-          // same context and msgid. this could theorically be merged.
           trans[kv.context][kv.value].comments.reference.push(kv.key);
         } else {
           trans[kv.context][kv.value] = {
@@ -242,15 +235,12 @@ var parseGettext = function parseGettext(locale, data) {
           delkeys.push([kv.context, kv.key]);
         }
       } else {
-        var msgid = kv.key; // eslint-disable-next-line camelcase
-        // eslint-disable-next-line camelcase
-
+        var msgid = kv.key;
         var msgid_plural = kv.key;
 
         if (kv.key.indexOf('|#|') > -1) {
           var p = kv.key.split('|#|');
-          msgid = p[0]; // eslint-disable-next-line camelcase
-
+          msgid = p[0];
           msgid_plural = p[1];
         }
 
@@ -266,7 +256,6 @@ var parseGettext = function parseGettext(locale, data) {
 
       if (options.keyasareference) {
         if (_typeof(trans[kv.context][kv.value]) === 'object') {
-          // same context and msgid. this could theorically be merged.
           trans[kv.context][kv.value].comments.reference.push(kv.key);
         } else {
           trans[kv.context][kv.value] = {
@@ -295,8 +284,7 @@ var parseGettext = function parseGettext(locale, data) {
     var c = a[0];
     var k = a[1];
     delete trans[c][k];
-  }); // re-format reference comments to be able to compile with gettext-parser...
-
+  });
   Object.keys(trans).forEach(function (ctxt) {
     Object.keys(trans[ctxt]).forEach(function (id) {
       if (trans[ctxt][id].comments && trans[ctxt][id].comments.reference) {
@@ -311,10 +299,10 @@ var parseGettext = function parseGettext(locale, data) {
 function i18next2po(locale, body) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var data;
-  var flat = (0, _flatten["default"])(typeof body === 'string' ? JSON.parse(body) : body, options);
+  var flat = (0, _flatten.default)(typeof body === 'string' ? JSON.parse(body) : body, options);
 
   if (options.base) {
-    var bflat = (0, _flatten["default"])(JSON.parse(options.base), options);
+    var bflat = (0, _flatten.default)(JSON.parse(options.base), options);
     Object.keys(bflat).forEach(function (key) {
       if (flat[key]) {
         if (flat[key].plurals) {
@@ -328,7 +316,7 @@ function i18next2po(locale, body) {
   }
 
   data = parseGettext(locale, flat, options);
-  return (0, _poCompiler["default"])(data, options);
+  return (0, _poCompiler.default)(data, options);
 }
 
 module.exports = exports.default;
@@ -341,34 +329,34 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "po2js", {
   enumerable: true,
   get: function get() {
-    return _po2js["default"];
+    return _po2js.default;
   }
 });
 Object.defineProperty(exports, "js2po", {
   enumerable: true,
   get: function get() {
-    return _js2po["default"];
+    return _js2po.default;
   }
 });
 Object.defineProperty(exports, "js2i18next", {
   enumerable: true,
   get: function get() {
-    return _js2i18next["default"];
+    return _js2i18next.default;
   }
 });
 Object.defineProperty(exports, "po2i18next", {
   enumerable: true,
   get: function get() {
-    return _po2i18next["default"];
+    return _po2i18next.default;
   }
 });
 Object.defineProperty(exports, "i18next2po", {
   enumerable: true,
   get: function get() {
-    return _i18next2po["default"];
+    return _i18next2po.default;
   }
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _po2js = _interopRequireDefault(require("./po2js.js"));
 
@@ -380,27 +368,27 @@ var _po2i18next = _interopRequireDefault(require("./po2i18next.js"));
 
 var _i18next2po = _interopRequireDefault(require("./i18next2po.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = {
-  po2js: _po2js["default"],
-  js2po: _js2po["default"],
-  js2i18next: _js2i18next["default"],
-  po2i18next: _po2i18next["default"],
-  i18next2po: _i18next2po["default"]
+  po2js: _po2js.default,
+  js2po: _js2po.default,
+  js2i18next: _js2i18next.default,
+  po2i18next: _po2i18next.default,
+  i18next2po: _i18next2po.default
 };
-exports["default"] = _default;
+exports.default = _default;
 },{"./i18next2po.js":2,"./js2i18next.js":4,"./js2po.js":5,"./po2i18next.js":7,"./po2js.js":8}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports.default = _default;
 
 var _plurals = _interopRequireDefault(require("./plurals.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -415,7 +403,6 @@ var toArrayIfNeeded = function toArrayIfNeeded(value, _ref) {
 
 var emptyOrObject = function emptyOrObject(key, value, options) {
   if (options.skipUntranslated && !value) {
-    // empty string or other falsey
     return {};
   }
 
@@ -432,7 +419,7 @@ var getGettextValues = function getGettextValues(value, locale, targetKey, optio
   var isPlural = !!value.msgid_plural;
   if (!isPlural) return emptyOrObject(targetKey, values[0], options);
 
-  var ext = _plurals["default"][locale.toLowerCase()] || _plurals["default"][locale.split(/_|-/)[0].toLowerCase()] || _plurals["default"].dev;
+  var ext = _plurals.default[locale.toLowerCase()] || _plurals.default[locale.split(/_|-/)[0].toLowerCase()] || _plurals.default.dev;
 
   var gettextValues = {};
 
@@ -489,8 +476,6 @@ function _default(js) {
       var appendTo = json;
 
       if (key.length === 0) {
-        // delete if msgid is empty.
-        // this might be the header.
         delete context[key];
         return;
       }
@@ -520,12 +505,9 @@ function _default(js) {
       if (m !== '' && !options.ignoreCtx) targetKey = "".concat(targetKey).concat(ctxSeparator).concat(m);
 
       if (options.persistMsgIdPlural) {
-        // eslint-disable-next-line camelcase
         var _context$key = context[key];
-        var msgid = _context$key.msgid; // eslint-disable-next-line camelcase
-
-        var msgid_plural = _context$key.msgid_plural; // eslint-disable-next-line camelcase
-
+        var msgid = _context$key.msgid;
+        var msgid_plural = _context$key.msgid_plural;
         if (msgid_plural && msgid !== msgid_plural) targetKey = "".concat(msgid, "|#|").concat(msgid_plural);
       }
 
@@ -543,14 +525,14 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = js2po;
+exports.default = js2po;
 
 var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function js2po(table, options) {
-  return (0, _poCompiler["default"])(table, options);
+  return (0, _poCompiler.default)(table, options);
 }
 
 module.exports = exports.default;
@@ -560,11 +542,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
-// copied from: https://github.com/i18next/i18next/blob/master/src/PluralResolver.js
-// definition http://translate.sourceforge.net/wiki/l10n/pluralforms
-
-/* eslint-disable */
+exports.default = void 0;
 var sets = [{
   lngs: ['ach', 'ak', 'am', 'arn', 'br', 'fil', 'gun', 'ln', 'mfe', 'mg', 'mi', 'oc', 'pt', 'pt-BR', 'tg', 'ti', 'tr', 'uz', 'wa'],
   nr: [1, 2],
@@ -675,15 +653,13 @@ var rulesPluralsTypes = {
   14: '((n==1) ? 0 : (n==2) ? 1 : (n == 3) ? 2 : 3)',
   15: '(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)',
   16: '(n%10==1 && n%100!=11 ? 0 : n !== 0 ? 1 : 2)',
-  17: '(n==1 || n%10==1 ? 0 : 1)',
+  17: '(n==1 || n%10==1 && n%100!=11 ? 0 : 1)',
   18: '(n==0 ? 0 : n==1 ? 1 : 2)',
   19: '(n==1 ? 0 : n==0 || ( n%100>1 && n%100<11) ? 1 : (n%100>10 && n%100<20 ) ? 2 : 3)',
   20: '(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2)',
   21: '(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0)',
   22: '(n==1 ? 0 : n==2 ? 1 : (n<0 || n>10) && n%10==0 ? 2 : 3)'
 };
-/* eslint-enable */
-
 var rules = {};
 sets.forEach(function (set) {
   set.lngs.forEach(function (l) {
@@ -694,7 +670,7 @@ sets.forEach(function (set) {
   });
 });
 var _default = rules;
-exports["default"] = _default;
+exports.default = _default;
 module.exports = exports.default;
 },{}],7:[function(require,module,exports){
 "use strict";
@@ -702,17 +678,17 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = po2i18next;
+exports.default = po2i18next;
 
 var _po2js = _interopRequireDefault(require("./po2js.js"));
 
 var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function po2i18next(fileContents, options) {
-  var js = (0, _po2js["default"])(fileContents, options);
-  return (0, _js2i18next["default"])(js, options);
+  var js = (0, _po2js.default)(fileContents, options);
+  return (0, _js2i18next.default)(js, options);
 }
 
 module.exports = exports.default;
@@ -722,14 +698,14 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = po2js;
+exports.default = po2js;
 
 var _poParser = _interopRequireDefault(require("./poParser.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function po2js(fileContents, options) {
-  return (0, _poParser["default"])(fileContents, options);
+  return (0, _poParser.default)(fileContents, options);
 }
 
 module.exports = exports.default;
@@ -739,7 +715,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports.default = _default;
 
 var _contentType = _interopRequireDefault(require("content-type"));
 
@@ -747,34 +723,22 @@ var _encoding = _interopRequireDefault(require("encoding"));
 
 var _shared = require("./shared.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-/**
- * Handles header values, replaces or adds (if needed) a charset property
- * @param {Object} table Translation table to be compiled
- */
 var handleCharset = function handleCharset(table) {
-  var ct = _contentType["default"].parse(table.headers['Content-Type'] || 'text/plain');
+  var ct = _contentType.default.parse(table.headers['Content-Type'] || 'text/plain');
 
-  var charset = (0, _shared.formatCharset)(table.charset || ct.parameters.charset || 'utf-8'); // clean up content-type charset independently using fallback if missing
+  var charset = (0, _shared.formatCharset)(table.charset || ct.parameters.charset || 'utf-8');
 
   if (ct.parameters.charset) {
     ct.parameters.charset = (0, _shared.formatCharset)(ct.parameters.charset);
   }
 
   table.charset = charset;
-  table.headers['Content-Type'] = _contentType["default"].format(ct);
+  table.headers['Content-Type'] = _contentType.default.format(ct);
 };
-/**
- * Converts a comments object to a comment string. The comment object is
- * in the form of {translator:'', reference: '', extracted: '', flag: '', previous:''}
- *
- * @param {Object} comments A comments object
- * @return {String} A comment string for the PO file
- */
-
 
 var drawComments = function drawComments(comments) {
   var lines = [];
@@ -802,21 +766,12 @@ var drawComments = function drawComments(comments) {
   });
   return lines.join('\n');
 };
-/**
- * Escapes and joins a key and a value for the PO string
- *
- * @param {String} key Key name
- * @param {String} value Key value
- * @return {String} Joined and escaped key-value pair
- */
-
 
 var addPOString = function addPOString() {
   var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var options = arguments.length > 2 ? arguments[2] : undefined;
-  key = key.toString(); // escape newlines and quotes
-
+  key = key.toString();
   value = value.toString().replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\t/g, '\\t').replace(/\r/g, '\\r').replace(/\n/g, '\\n');
   var lines = [value];
 
@@ -830,14 +785,6 @@ var addPOString = function addPOString() {
 
   return "".concat(key, " \"\"\n\"").concat(lines.join('"\n"'), "\"");
 };
-/**
- * Builds a PO string for a single translation object
- *
- * @param {Object} block Translation object
- * @param {Object} [override] Properties of this object will override `block` properties
- * @return {String} Translation string for a single object
- */
-
 
 var drawBlock = function drawBlock(block) {
   var override = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -847,7 +794,7 @@ var drawBlock = function drawBlock(block) {
   var msgid = override.msgid || block.msgid;
   var msgidPlural = override.msgid_plural || block.msgid_plural;
   var msgstr = [].concat(override.msgstr || block.msgstr);
-  var comments = override.comments || block.comments; // add comments
+  var comments = override.comments || block.comments;
 
   if (comments && (comments = drawComments(comments))) {
     response.push(comments);
@@ -870,12 +817,6 @@ var drawBlock = function drawBlock(block) {
 
   return response.join('\n');
 };
-/**
- * Compiles translation object into a PO object
- *
- * @return {String} Compiled PO object
- */
-
 
 var compile = function compile(table, options) {
   var headerBlock = table.translations[''] && table.translations[''][''] || {};
@@ -905,19 +846,11 @@ var compile = function compile(table, options) {
   }, options));
 
   if (table.charset === 'utf-8' || table.charset === 'ascii') {
-    // return Buffer.from(response.join('\n\n'), 'utf-8')
     return response.join('\n\n');
   }
 
-  return _encoding["default"].convert(response.join('\n\n'), table.charset).toString();
+  return _encoding.default.convert(response.join('\n\n'), table.charset).toString();
 };
-/**
- * Creates a PO compiler object.
- *
- * @constructor
- * @param {Object} table Translation table to be compiled
- */
-
 
 function _default() {
   var table = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -952,15 +885,14 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = _default;
+exports.default = _default;
 
 var _encoding = _interopRequireDefault(require("encoding"));
 
 var _shared = require("./shared.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// inspired by https://github.com/smhg/gettext-parser/blob/master/lib/poparser.js
 var states = {
   none: 0x01,
   comments: 0x02,
@@ -981,15 +913,8 @@ var symbols = {
 };
 
 var toString = function toString(buf, charset) {
-  return _encoding["default"].convert(buf, 'utf-8', charset).toString('utf-8');
+  return _encoding.default.convert(buf, 'utf-8', charset).toString('utf-8');
 };
-/**
- * Parses a header string into an object of key-value pairs
- *
- * @param {String} str Header string
- * @return {Object} An object of key-value pairs
- */
-
 
 var parseHeader = function parseHeader() {
   var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -1037,12 +962,6 @@ var handleCharset = function handleCharset() {
     charset: charset
   };
 };
-/**
- * Token parser. Parsed state can be found from lex
- *
- * @param {String} chunk String
- */
-
 
 var lexer = function lexer(chunk) {
   var lex = [];
@@ -1148,13 +1067,6 @@ var lexer = function lexer(chunk) {
 
   return lex;
 };
-/**
- * Join multi line strings
- *
- * @param {Object} tokens Parsed tokens
- * @return {Object} Parsed tokens, with multi line strings joined into one
- */
-
 
 var joinStringValues = function joinStringValues(tokens) {
   var response = [];
@@ -1173,15 +1085,8 @@ var joinStringValues = function joinStringValues(tokens) {
 
   return response;
 };
-/**
- * Parse comments into separate comment blocks
- *
- * @param {Object} tokens Parsed tokens
- */
-
 
 var parseComments = function parseComments(tokens) {
-  // parse comments
   tokens.forEach(function (node) {
     var comment;
     var lines;
@@ -1226,13 +1131,6 @@ var parseComments = function parseComments(tokens) {
     }
   });
 };
-/**
- * Join gettext keys with values
- *
- * @param {Object} tokens Parsed tokens
- * @return {Object} Tokens
- */
-
 
 var handleKeys = function handleKeys(tokens) {
   var response = [];
@@ -1257,13 +1155,6 @@ var handleKeys = function handleKeys(tokens) {
 
   return response;
 };
-/**
- * Separate different values into individual translation objects
- *
- * @param {Object} tokens Parsed tokens
- * @return {Object} Tokens
- */
-
 
 var handleValues = function handleValues(tokens) {
   var response = [];
@@ -1300,13 +1191,6 @@ var handleValues = function handleValues(tokens) {
 
   return response;
 };
-/**
- * Compose a translation table from tokens object
- *
- * @param {Object} tokens Parsed tokens
- * @return {Object} Translation table
- */
-
 
 var normalize = function normalize(tokens, charset) {
   var table = {
@@ -1329,14 +1213,6 @@ var normalize = function normalize(tokens, charset) {
 
   return table;
 };
-/**
-* Converts parsed tokens to a translation table
-*
-* @param {Object} tokens Parsed tokens
-* @param {String} [charset] charset to use
-* @returns {Object} Translation table
-*/
-
 
 var finalize = function finalize(tokens, charset) {
   var data = joinStringValues(tokens);
@@ -1345,16 +1221,6 @@ var finalize = function finalize(tokens, charset) {
   data = handleValues(data);
   return normalize(data, charset);
 };
-/**
- * Creates a PO parser object. If PO object is a string,
- * UTF-8 will be used as the charset
- *
- * @constructor
- * @param {Buffer|String} fileContents PO object
- * @param {String} [defaultCharset] Default charset to use
- * @return {Object} Translation table
- */
-
 
 function _default(fileContents) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -1390,16 +1256,7 @@ exports.compareMsgid = compareMsgid;
 exports.foldLine = foldLine;
 exports.generateHeader = generateHeader;
 exports.formatCharset = exports.HEADERS = void 0;
-// inspired by https://github.com/smhg/gettext-parser/blob/master/lib/shared.js
-// see https://www.gnu.org/software/gettext/manual/html_node/Header-Entry.html
 var HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
-/**
- * Normalizes charset name. Converts utf8 to utf-8, WIN1257 to windows-1257 etc.
- *
- * @param {String} charset Charset name
- * @return {String} Normalized charset name
- */
-
 exports.HEADERS = HEADERS;
 
 var formatCharset = function formatCharset() {
@@ -1407,13 +1264,6 @@ var formatCharset = function formatCharset() {
   var defaultCharset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'iso-8859-1';
   return charset.toString().toLowerCase().replace(/^utf[-_]?(\d+)$/, 'utf-$1').replace(/^win(?:dows)?[-_]?(\d+)$/, 'windows-$1').replace(/^latin[-_]?(\d+)$/, 'iso-8859-$1').replace(/^(us[-_]?)?ascii$/, 'ascii').replace(/^charset$/, defaultCharset).trim();
 };
-/**
- * Comparator function for comparing msgid
- * @param {Object} object with msgid prev
- * @param {Object} object with msgid next
- * @returns {number} comparator index
- */
-
 
 exports.formatCharset = formatCharset;
 
@@ -1424,14 +1274,6 @@ function compareMsgid(_ref, _ref2) {
   if (left > right) return 1;
   return 0;
 }
-/**
-* Folds long lines according to PO format
-*
-* @param {String} str PO formatted string to be folded
-* @param {Number} [maxLen=76] Maximum allowed length for folded lines
-* @return {Array} An array of lines
-*/
-
 
 function foldLine(str) {
   var maxLen = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 76;
@@ -1442,24 +1284,18 @@ function foldLine(str) {
   var match;
 
   while (pos < len) {
-    curLine = str.substr(pos, maxLen); // ensure that the line never ends with a partial escaping
-    // make longer lines if needed
+    curLine = str.substr(pos, maxLen);
 
     while (curLine.substr(-1) === '\\' && pos + curLine.length < len) {
       curLine += str.charAt(pos + curLine.length);
-    } // ensure that if possible, line breaks are done at reasonable places
-
+    }
 
     if (match = /.*?\\n/.exec(curLine)) {
-      // use everything before and including the first line break
       curLine = match[0];
     } else if (pos + curLine.length < len) {
-      // if we're not at the end
       if ((match = /.*\s+/.exec(curLine)) && /[^\s]/.test(match[0])) {
-        // use everything before and including the last white space character (if anything)
         curLine = match[0];
       } else if ((match = /.*[\x21-\x2f0-9\x5b-\x60\x7b-\x7e]+/.exec(curLine)) && /[^\x21-\x2f0-9\x5b-\x60\x7b-\x7e]/.test(match[0])) {
-        // use everything before and including the last "special" character (if anything)
         curLine = match[0];
       }
     }
@@ -1470,13 +1306,6 @@ function foldLine(str) {
 
   return lines;
 }
-/**
- * Joins a header object of key value pairs into a header string
- *
- * @param {Object} header Object of key value pairs
- * @return {String} Header string
- */
-
 
 function generateHeader() {
   var header = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};

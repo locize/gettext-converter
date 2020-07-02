@@ -1,3 +1,8 @@
+### 1.0.5
+
+- fix Macedonian plural formula
+- transpile also esm
+
 ### 1.0.4
 
 - fix plural rules for python
