@@ -1,3 +1,7 @@
+### 1.0.6
+
+- plurals for ht and iw
+
 ### 1.0.5
 
 - fix Macedonian plural formula

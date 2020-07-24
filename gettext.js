@@ -552,7 +552,7 @@ var sets = [{
   nr: [1, 2],
   fc: 2
 }, {
-  lngs: ['ay', 'bo', 'cgg', 'fa', 'id', 'ja', 'jbo', 'ka', 'kk', 'km', 'ko', 'ky', 'lo', 'ms', 'sah', 'su', 'th', 'tt', 'ug', 'vi', 'wo', 'zh'],
+  lngs: ['ay', 'bo', 'cgg', 'fa', 'ht', 'id', 'ja', 'jbo', 'ka', 'kk', 'km', 'ko', 'ky', 'lo', 'ms', 'sah', 'su', 'th', 'tt', 'ug', 'vi', 'wo', 'zh'],
   nr: [1],
   fc: 3
 }, {
@@ -632,7 +632,7 @@ var sets = [{
   nr: [5, 1, 2, 3],
   fc: 21
 }, {
-  lngs: ['he'],
+  lngs: ['he', 'iw'],
   nr: [1, 2, 20, 21],
   fc: 22
 }];
