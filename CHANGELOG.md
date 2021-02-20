@@ -1,3 +1,7 @@
+### 1.0.7
+
+- plurals for tl
+
 ### 1.0.6
 
 - plurals for ht and iw
