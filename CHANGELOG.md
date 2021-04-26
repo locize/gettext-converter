@@ -1,3 +1,7 @@
+### 1.0.8
+
+- plurals fix for kk
+
 ### 1.0.7
 
 - plurals for tl
