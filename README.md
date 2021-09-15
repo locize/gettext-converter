@@ -103,11 +103,9 @@ const i18nextJs = {
   'key_other': 'some values'
 }
 
-import po2i18next from 'gettext-converter/po2i18next'
-const res = po2i18next(po, { compatibilityJSON: 'v4' })
-// res is like i18nextJs
-
 import i18next2po from 'gettext-converter/i18next2po'
 const res = i18next2po('en', i18nextJs, { compatibilityJSON: 'v4' })
-// res is like po
+
+import po2i18next from 'gettext-converter/po2i18next'
+const res = po2i18next(po, { compatibilityJSON: 'v4' })
 ```
