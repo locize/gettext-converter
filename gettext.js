@@ -4,7 +4,393 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
+var sets = [{
+  lngs: ['ach', 'ak', 'am', 'arn', 'gun', 'ln', 'mfe', 'mg', 'mi', 'oc', 'pt', 'pt-BR', 'tg', 'ti', 'tr', 'uz', 'wa'],
+  toCldr: {
+    '': 1,
+    _plural: 5
+  },
+  fromCldr: {
+    1: '',
+    5: '_plural'
+  }
+}, {
+  lngs: ['br'],
+  toCldr: {
+    '': 1,
+    _plural: 1
+  },
+  fromCldr: {
+    1: '_plural',
+    2: '_plural',
+    3: '_plural',
+    5: '_plural'
+  }
+}, {
+  lngs: ['fil', 'tl'],
+  toCldr: {
+    '': 1,
+    _plural: 5
+  },
+  fromCldr: {
+    1: '_plural',
+    5: '_plural'
+  }
+}, {
+  lngs: ['af', 'an', 'ast', 'az', 'bg', 'bn', 'ca', 'da', 'de', 'dev', 'el', 'en', 'eo', 'es', 'et', 'eu', 'fi', 'fo', 'fur', 'fy', 'gl', 'gu', 'ha', 'hi', 'hu', 'hy', 'ia', 'it', 'kk', 'kn', 'ku', 'lb', 'mai', 'ml', 'mn', 'mr', 'nah', 'nap', 'nb', 'ne', 'nl', 'nn', 'no', 'nso', 'pa', 'pap', 'pms', 'ps', 'pt-PT', 'rm', 'sco', 'si', 'so', 'son', 'sq', 'sv', 'sw', 'ta', 'te', 'tk', 'ur'],
+  toCldr: {
+    _plural: 5,
+    '': 1
+  },
+  fromCldr: {
+    1: '',
+    5: '_plural'
+  }
+}, {
+  lngs: ['se'],
+  toCldr: {
+    _plural: 2,
+    '': 1
+  },
+  fromCldr: {
+    1: '',
+    2: '_plural',
+    5: '_plural'
+  }
+}, {
+  lngs: ['yo'],
+  toCldr: {
+    _plural: 5,
+    '': 5
+  },
+  fromCldr: {
+    5: ''
+  }
+}, {
+  lngs: ['ay', 'bo', 'id', 'ja', 'jbo', 'km', 'ko', 'lo', 'ms', 'sah', 'su', 'th', 'tt', 'vi', 'wo', 'zh'],
+  toCldr: {
+    _0: 5
+  },
+  fromCldr: {
+    5: '_0'
+  }
+}, {
+  lngs: ['cgg', 'ka', 'ky', 'ug'],
+  toCldr: {
+    _0: 1
+  },
+  fromCldr: {
+    1: '_0',
+    5: '_0'
+  }
+}, {
+  lngs: ['fa'],
+  toCldr: {
+    _0: 5
+  },
+  fromCldr: {
+    1: '_0',
+    5: '_0'
+  }
+}, {
+  lngs: ['be', 'cnr', 'ru', 'uk'],
+  toCldr: {
+    _2: 4,
+    _0: 1,
+    _1: 3
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    4: '_2'
+  }
+}, {
+  lngs: ['bs', 'hr', 'sr'],
+  toCldr: {
+    _2: 5,
+    _0: 1,
+    _1: 3
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    5: '_2'
+  }
+}, {
+  lngs: ['dz'],
+  toCldr: {
+    _2: 5,
+    _0: 5,
+    _1: 5
+  },
+  fromCldr: {
+    5: '_1'
+  }
+}, {
+  lngs: ['ar'],
+  toCldr: {
+    _0: 0,
+    _1: 1,
+    _2: 2,
+    _3: 3,
+    _4: 4,
+    _5: 5
+  },
+  fromCldr: {
+    0: '_0',
+    1: '_1',
+    2: '_2',
+    3: '_3',
+    4: '_4',
+    5: '_5'
+  }
+}, {
+  lngs: ['cs', 'sk'],
+  toCldr: {
+    _2: 5,
+    _0: 1,
+    _1: 3
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    5: '_2'
+  }
+}, {
+  lngs: ['csb', 'pl'],
+  toCldr: {
+    _2: 4,
+    _0: 1,
+    _1: 3
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    4: '_2'
+  }
+}, {
+  lngs: ['cy'],
+  toCldr: {
+    _2: 4,
+    _0: 1,
+    _1: 2,
+    _3: 5
+  },
+  fromCldr: {
+    0: '_2',
+    1: '_0',
+    2: '_1',
+    3: '_2',
+    4: '_2',
+    5: '_3'
+  }
+}, {
+  lngs: ['fr'],
+  toCldr: {
+    '': 1,
+    _plural: 5
+  },
+  fromCldr: {
+    1: '',
+    5: '_plural'
+  }
+}, {
+  lngs: ['ga'],
+  toCldr: {
+    _2: 3,
+    _0: 1,
+    _1: 2,
+    _3: 4,
+    _4: 5
+  },
+  fromCldr: {
+    1: '_0',
+    2: '_1',
+    3: '_2',
+    4: '_3',
+    5: '_4'
+  }
+}, {
+  lngs: ['gd'],
+  toCldr: {
+    _3: 5,
+    _0: 1,
+    _1: 2,
+    _2: 3
+  },
+  fromCldr: {
+    1: '_0',
+    2: '_1',
+    3: '_2',
+    5: '_3'
+  }
+}, {
+  lngs: ['is'],
+  toCldr: {
+    _plural: 5,
+    '': 1
+  },
+  fromCldr: {
+    1: '',
+    5: '_plural'
+  }
+}, {
+  lngs: ['jv'],
+  toCldr: {
+    _0: 5,
+    _1: 5
+  },
+  fromCldr: {
+    5: '_1'
+  }
+}, {
+  lngs: ['kw'],
+  toCldr: {
+    _3: 5,
+    _0: 1,
+    _1: 2,
+    _2: 5
+  },
+  fromCldr: {
+    1: '_0',
+    2: '_1',
+    5: '_2'
+  }
+}, {
+  lngs: ['lt'],
+  toCldr: {
+    _2: 5,
+    _0: 1,
+    _1: 3
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    5: '_2'
+  }
+}, {
+  lngs: ['lv'],
+  toCldr: {
+    _2: 0,
+    _0: 1,
+    _1: 0
+  },
+  fromCldr: {
+    0: '_1',
+    1: '_0',
+    5: '_1'
+  }
+}, {
+  lngs: ['mk'],
+  toCldr: {
+    _plural: 5,
+    '': 1
+  },
+  fromCldr: {
+    1: '',
+    5: '_plural'
+  }
+}, {
+  lngs: ['mnk'],
+  toCldr: {
+    _0: 0,
+    _1: 1,
+    _2: 5
+  },
+  fromCldr: {
+    0: '_0',
+    1: '_1',
+    5: '_2'
+  }
+}, {
+  lngs: ['mt'],
+  toCldr: {
+    _1: 3,
+    _0: 1,
+    _2: 4,
+    _3: 5
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    4: '_2',
+    5: '_3'
+  }
+}, {
+  lngs: ['or'],
+  toCldr: {
+    _1: 5,
+    _0: 1
+  },
+  fromCldr: {
+    1: '_0',
+    5: '_1'
+  }
+}, {
+  lngs: ['ro'],
+  toCldr: {
+    _1: 3,
+    _0: 1,
+    _2: 5
+  },
+  fromCldr: {
+    1: '_0',
+    3: '_1',
+    5: '_2'
+  }
+}, {
+  lngs: ['sl'],
+  toCldr: {
+    _0: 5,
+    _1: 1,
+    _2: 2,
+    _3: 3
+  },
+  fromCldr: {
+    1: '_1',
+    2: '_2',
+    3: '_3',
+    5: '_0'
+  }
+}, {
+  lngs: ['he'],
+  toCldr: {
+    _3: 5,
+    _0: 1,
+    _1: 2,
+    _2: 4
+  },
+  fromCldr: {
+    1: '_0',
+    2: '_1',
+    4: '_2',
+    5: '_3'
+  }
+}];
+var rules = {};
+sets.forEach(function (set) {
+  set.lngs.forEach(function (l) {
+    rules[l] = {
+      toCldr: set.toCldr,
+      fromCldr: set.fromCldr
+    };
+  });
+});
+var _default = rules;
 exports.default = _default;
+module.exports = exports.default;
+},{}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -18,6 +404,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
+
 var regexIndexOf = function regexIndexOf(value, regex, startpos) {
   var indexOf = value.substring(startpos || 0).search(regex);
   return indexOf >= 0 ? indexOf + (startpos || 0) : indexOf;
@@ -29,11 +417,14 @@ function _default(input) {
       keyseparator = _ref$keyseparator === void 0 ? '##' : _ref$keyseparator,
       _ref$ctxSeparator = _ref.ctxSeparator,
       ctxSeparator = _ref$ctxSeparator === void 0 ? '_' : _ref$ctxSeparator,
-      ignorePlurals = _ref.ignorePlurals;
+      ignorePlurals = _ref.ignorePlurals,
+      compatibilityJSON = _ref.compatibilityJSON,
+      language = _ref.language;
 
+  var locale = arguments.length > 2 ? arguments[2] : undefined;
   var flat = {};
 
-  function recurse(appendTo, obj, parentKey) {
+  function handleOldFormat(appendTo, obj, parentKey) {
     Object.keys(obj).forEach(function (m) {
       var kv;
       var key = parentKey;
@@ -105,6 +496,100 @@ function _default(input) {
     });
   }
 
+  function handleNewFormat(appendTo, obj, parentKey) {
+    Object.keys(obj).forEach(function (m) {
+      var kv;
+      var key = parentKey;
+      var context = '';
+      var value = obj[m];
+
+      if (key.length > 0) {
+        key = key + keyseparator + m;
+      } else {
+        key = m;
+      }
+
+      var pluralIndex = key.indexOf('_other');
+      if (pluralIndex < 0) pluralIndex = regexIndexOf(key, new RegExp("_(".concat(FORMS.join('|'), ")$")));
+      var isPlural = pluralIndex > -1;
+      var code = locale || language;
+
+      var cldrRule = _cldrConv.default[code] || _cldrConv.default[code.split(/-|_/)[0]];
+
+      if (!cldrRule && locale && language) {
+        cldrRule = _cldrConv.default[language] || _cldrConv.default[language.split(/-|_/)[0]];
+      }
+
+      if (!cldrRule) isPlural = false;
+      if (ignorePlurals) isPlural = false;
+      var form;
+      var number = 0;
+
+      if (isPlural && key.indexOf('_other') < 0) {
+        form = key.substring(pluralIndex + 1);
+        var oldSuffix = cldrRule.fromCldr[FORMS.indexOf(form)];
+        if (!oldSuffix) isPlural = false;
+        number = parseInt(oldSuffix.substring(1), 10);
+        if (number === 1) isPlural = false;
+        key = key.substring(0, pluralIndex);
+      } else if (key.indexOf('_other') > -1) {
+        number = 2;
+        key = key.substring(0, pluralIndex);
+        form = '_other';
+      }
+
+      var ctxKey = key;
+
+      if (isPlural) {
+        ctxKey = ctxKey.substring(0, pluralIndex);
+
+        if (ctxKey.indexOf(ctxSeparator) > -1) {
+          context = ctxKey.substring(ctxKey.lastIndexOf(ctxSeparator) + ctxSeparator.length, ctxKey.length);
+        }
+      } else if (key.indexOf(ctxSeparator) > -1) {
+        context = ctxKey.substring(ctxKey.lastIndexOf(ctxSeparator) + ctxSeparator.length, ctxKey.length);
+      } else {
+        context = '';
+      }
+
+      if (context === key) context = '';
+      if (context !== '') key = key.replace(ctxSeparator + context, '');
+      var appendKey = key + context;
+      if (isPlural) appendKey = "".concat(appendKey, "_").concat(number);
+
+      if (typeof value === 'string') {
+        kv = {
+          key: key,
+          value: value,
+          isPlural: isPlural,
+          pluralNumber: isPlural ? number : 0,
+          context: context
+        };
+        appendTo[appendKey] = kv;
+      } else if (Array.isArray(value)) {
+        kv = {
+          key: key,
+          value: value.join('\n'),
+          isArray: true,
+          isPlural: isPlural,
+          pluralNumber: isPlural ? number : 0,
+          context: context
+        };
+        appendTo[appendKey] = kv;
+      } else {
+        recurse(appendTo, value, key);
+      }
+    });
+  }
+
+  function recurse(appendTo, obj, parentKey) {
+    if (compatibilityJSON === 'v4') {
+      handleNewFormat(appendTo, obj, parentKey);
+    } else {
+      handleOldFormat(appendTo, obj, parentKey);
+    }
+  }
+
   recurse(flat, input, '');
   Object.keys(flat).forEach(function (m) {
     var kv = flat[m];
@@ -129,7 +614,7 @@ function _default(input) {
 }
 
 module.exports = exports.default;
-},{}],2:[function(require,module,exports){
+},{"./cldrConv.js":1}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -299,7 +784,7 @@ var parseGettext = function parseGettext(locale, data) {
 function i18next2po(locale, body) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var data;
-  var flat = (0, _flatten.default)(typeof body === 'string' ? JSON.parse(body) : body, options);
+  var flat = (0, _flatten.default)(typeof body === 'string' ? JSON.parse(body) : body, options, locale);
 
   if (options.base) {
     var bflat = (0, _flatten.default)(JSON.parse(options.base), options);
@@ -320,7 +805,7 @@ function i18next2po(locale, body) {
 }
 
 module.exports = exports.default;
-},{"./flatten.js":1,"./plurals.js":6,"./poCompiler.js":9}],3:[function(require,module,exports){
+},{"./flatten.js":2,"./plurals.js":7,"./poCompiler.js":10}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -378,7 +863,7 @@ var _default = {
   i18next2po: _i18next2po.default
 };
 exports.default = _default;
-},{"./i18next2po.js":2,"./js2i18next.js":4,"./js2po.js":5,"./po2i18next.js":7,"./po2js.js":8}],4:[function(require,module,exports){
+},{"./i18next2po.js":3,"./js2i18next.js":5,"./js2po.js":6,"./po2i18next.js":8,"./po2js.js":9}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -388,9 +873,13 @@ exports.default = _default;
 
 var _plurals = _interopRequireDefault(require("./plurals.js"));
 
+var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
 var isFuzzy = function isFuzzy(translation) {
   return !!translation.comments && translation.comments.flag === 'fuzzy';
@@ -425,6 +914,15 @@ var getGettextValues = function getGettextValues(value, locale, targetKey, optio
 
   for (var i = 0; i < values.length; i += 1) {
     var pluralSuffix = getI18nextPluralExtension(ext, i);
+
+    if (options.compatibilityJSON === 'v4') {
+      var cldrRule = _cldrConv.default[locale] || _cldrConv.default[locale.split(/-|_/)[0]];
+
+      if (cldrRule && cldrRule.toCldr[pluralSuffix] !== undefined && FORMS[cldrRule.toCldr[pluralSuffix]]) {
+        pluralSuffix = "_".concat(FORMS[cldrRule.toCldr[pluralSuffix]]);
+      }
+    }
+
     var pkey = targetKey + pluralSuffix;
     Object.assign(gettextValues, emptyOrObject(pkey, values[i], options));
   }
@@ -451,8 +949,6 @@ function _default(js) {
             }
 
             x.msgid = id;
-            console.log('id', id);
-            console.log('key', key);
             if (id !== key) keys.push([ctx, key]);
           });
         }
@@ -519,7 +1015,7 @@ function _default(js) {
 }
 
 module.exports = exports.default;
-},{"./plurals.js":6}],5:[function(require,module,exports){
+},{"./cldrConv.js":1,"./plurals.js":7}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -536,7 +1032,7 @@ function js2po(table, options) {
 }
 
 module.exports = exports.default;
-},{"./poCompiler.js":9}],6:[function(require,module,exports){
+},{"./poCompiler.js":10}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -672,7 +1168,7 @@ sets.forEach(function (set) {
 var _default = rules;
 exports.default = _default;
 module.exports = exports.default;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -692,7 +1188,7 @@ function po2i18next(fileContents, options) {
 }
 
 module.exports = exports.default;
-},{"./js2i18next.js":4,"./po2js.js":8}],8:[function(require,module,exports){
+},{"./js2i18next.js":5,"./po2js.js":9}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -709,7 +1205,7 @@ function po2js(fileContents, options) {
 }
 
 module.exports = exports.default;
-},{"./poParser.js":10}],9:[function(require,module,exports){
+},{"./poParser.js":11}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -879,7 +1375,7 @@ function _default() {
 }
 
 module.exports = exports.default;
-},{"./shared.js":11,"content-type":15,"encoding":16}],10:[function(require,module,exports){
+},{"./shared.js":12,"content-type":16,"encoding":17}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1246,7 +1742,7 @@ function _default(fileContents) {
 }
 
 module.exports = exports.default;
-},{"./shared.js":11,"encoding":16}],11:[function(require,module,exports){
+},{"./shared.js":12,"encoding":17}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1317,7 +1813,7 @@ function generateHeader() {
     return "".concat(key, ": ").concat((header[key] || '').trim());
   }).join('\n') + '\n';
 }
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -1469,9 +1965,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],13:[function(require,module,exports){
-
 },{}],14:[function(require,module,exports){
+
+},{}],15:[function(require,module,exports){
 (function (Buffer){(function (){
 /*!
  * The buffer module from node.js, for the browser.
@@ -3252,7 +3748,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"base64-js":12,"buffer":14,"ieee754":38}],15:[function(require,module,exports){
+},{"base64-js":13,"buffer":15,"ieee754":39}],16:[function(require,module,exports){
 /*!
  * content-type
  * Copyright(c) 2015 Douglas Christopher Wilson
@@ -3476,7 +3972,7 @@ function ContentType (type) {
   this.type = type
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (Buffer){(function (){
 'use strict';
 
@@ -3563,7 +4059,7 @@ function checkEncoding(name) {
 }
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"buffer":14,"iconv-lite":36}],17:[function(require,module,exports){
+},{"buffer":15,"iconv-lite":37}],18:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -4162,7 +4658,7 @@ function findIdx(table, val) {
 }
 
 
-},{"safer-buffer":41}],18:[function(require,module,exports){
+},{"safer-buffer":42}],19:[function(require,module,exports){
 "use strict";
 
 // Description of supported double byte encodings and aliases.
@@ -4340,7 +4836,7 @@ module.exports = {
     'xxbig5': 'big5hkscs',
 };
 
-},{"./tables/big5-added.json":24,"./tables/cp936.json":25,"./tables/cp949.json":26,"./tables/cp950.json":27,"./tables/eucjp.json":28,"./tables/gb18030-ranges.json":29,"./tables/gbk-added.json":30,"./tables/shiftjis.json":31}],19:[function(require,module,exports){
+},{"./tables/big5-added.json":25,"./tables/cp936.json":26,"./tables/cp949.json":27,"./tables/cp950.json":28,"./tables/eucjp.json":29,"./tables/gb18030-ranges.json":30,"./tables/gbk-added.json":31,"./tables/shiftjis.json":32}],20:[function(require,module,exports){
 "use strict";
 
 // Update this array if you add/rename/remove files in this directory.
@@ -4365,7 +4861,7 @@ for (var i = 0; i < modules.length; i++) {
             exports[enc] = module[enc];
 }
 
-},{"./dbcs-codec":17,"./dbcs-data":18,"./internal":20,"./sbcs-codec":21,"./sbcs-data":23,"./sbcs-data-generated":22,"./utf16":32,"./utf32":33,"./utf7":34}],20:[function(require,module,exports){
+},{"./dbcs-codec":18,"./dbcs-data":19,"./internal":21,"./sbcs-codec":22,"./sbcs-data":24,"./sbcs-data-generated":23,"./utf16":33,"./utf32":34,"./utf7":35}],21:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -4565,7 +5061,7 @@ InternalDecoderCesu8.prototype.end = function() {
     return res;
 }
 
-},{"safer-buffer":41,"string_decoder":42}],21:[function(require,module,exports){
+},{"safer-buffer":42,"string_decoder":43}],22:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -4639,7 +5135,7 @@ SBCSDecoder.prototype.write = function(buf) {
 SBCSDecoder.prototype.end = function() {
 }
 
-},{"safer-buffer":41}],22:[function(require,module,exports){
+},{"safer-buffer":42}],23:[function(require,module,exports){
 "use strict";
 
 // Generated data for sbcs codec. Don't edit manually. Regenerate using generation/gen-sbcs.js script.
@@ -5091,7 +5587,7 @@ module.exports = {
     "chars": "���������������������������������กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุู����฿เแโใไๅๆ็่้๊๋์ํ๎๏๐๑๒๓๔๕๖๗๘๙๚๛����"
   }
 }
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 
 // Manually added data to be used by sbcs codec in addition to generated one.
@@ -5272,7 +5768,7 @@ module.exports = {
 };
 
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports=[
 ["8740","䏰䰲䘃䖦䕸𧉧䵷䖳𧲱䳢𧳅㮕䜶䝄䱇䱀𤊿𣘗𧍒𦺋𧃒䱗𪍑䝏䗚䲅𧱬䴇䪤䚡𦬣爥𥩔𡩣𣸆𣽡晍囻"],
 ["8767","綕夝𨮹㷴霴𧯯寛𡵞媤㘥𩺰嫑宷峼杮薓𩥅瑡璝㡵𡵓𣚞𦀡㻬"],
@@ -5396,7 +5892,7 @@ module.exports=[
 ["fea1","𤅟𤩹𨮏孆𨰃𡢞瓈𡦈甎瓩甞𨻙𡩋寗𨺬鎅畍畊畧畮𤾂㼄𤴓疎瑝疞疴瘂瘬癑癏癯癶𦏵皐臯㟸𦤑𦤎皡皥皷盌𦾟葢𥂝𥅽𡸜眞眦着撯𥈠睘𣊬瞯𨥤𨥨𡛁矴砉𡍶𤨒棊碯磇磓隥礮𥗠磗礴碱𧘌辸袄𨬫𦂃𢘜禆褀椂禀𥡗禝𧬹礼禩渪𧄦㺨秆𩄍秔"]
 ]
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127,"€"],
 ["8140","丂丄丅丆丏丒丗丟丠両丣並丩丮丯丱丳丵丷丼乀乁乂乄乆乊乑乕乗乚乛乢乣乤乥乧乨乪",5,"乲乴",9,"乿",6,"亇亊"],
@@ -5662,7 +6158,7 @@ module.exports=[
 ["fe40","兀嗀﨎﨏﨑﨓﨔礼﨟蘒﨡﨣﨤﨧﨨﨩"]
 ]
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127],
 ["8141","갂갃갅갆갋",4,"갘갞갟갡갢갣갥",6,"갮갲갳갴"],
@@ -5937,7 +6433,7 @@ module.exports=[
 ["fda1","爻肴酵驍侯候厚后吼喉嗅帿後朽煦珝逅勛勳塤壎焄熏燻薰訓暈薨喧暄煊萱卉喙毁彙徽揮暉煇諱輝麾休携烋畦虧恤譎鷸兇凶匈洶胸黑昕欣炘痕吃屹紇訖欠欽歆吸恰洽翕興僖凞喜噫囍姬嬉希憙憘戱晞曦熙熹熺犧禧稀羲詰"]
 ]
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127],
 ["a140","　，、。．‧；：？！︰…‥﹐﹑﹒·﹔﹕﹖﹗｜–︱—︳╴︴﹏（）︵︶｛｝︷︸〔〕︹︺【】︻︼《》︽︾〈〉︿﹀「」﹁﹂『』﹃﹄﹙﹚"],
@@ -6116,7 +6612,7 @@ module.exports=[
 ["f9a1","龤灨灥糷虪蠾蠽蠿讞貜躩軉靋顳顴飌饡馫驤驦驧鬤鸕鸗齈戇欞爧虌躨钂钀钁驩驨鬮鸙爩虋讟钃鱹麷癵驫鱺鸝灩灪麤齾齉龘碁銹裏墻恒粧嫺╔╦╗╠╬╣╚╩╝╒╤╕╞╪╡╘╧╛╓╥╖╟╫╢╙╨╜║═╭╮╰╯▓"]
 ]
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127],
 ["8ea1","｡",62],
@@ -6300,9 +6796,9 @@ module.exports=[
 ["8feda1","黸黿鼂鼃鼉鼏鼐鼑鼒鼔鼖鼗鼙鼚鼛鼟鼢鼦鼪鼫鼯鼱鼲鼴鼷鼹鼺鼼鼽鼿齁齃",4,"齓齕齖齗齘齚齝齞齨齩齭",4,"齳齵齺齽龏龐龑龒龔龖龗龞龡龢龣龥"]
 ]
 
-},{}],29:[function(require,module,exports){
-module.exports={"uChars":[128,165,169,178,184,216,226,235,238,244,248,251,253,258,276,284,300,325,329,334,364,463,465,467,469,471,473,475,477,506,594,610,712,716,730,930,938,962,970,1026,1104,1106,8209,8215,8218,8222,8231,8241,8244,8246,8252,8365,8452,8454,8458,8471,8482,8556,8570,8596,8602,8713,8720,8722,8726,8731,8737,8740,8742,8748,8751,8760,8766,8777,8781,8787,8802,8808,8816,8854,8858,8870,8896,8979,9322,9372,9548,9588,9616,9622,9634,9652,9662,9672,9676,9680,9702,9735,9738,9793,9795,11906,11909,11913,11917,11928,11944,11947,11951,11956,11960,11964,11979,12284,12292,12312,12319,12330,12351,12436,12447,12535,12543,12586,12842,12850,12964,13200,13215,13218,13253,13263,13267,13270,13384,13428,13727,13839,13851,14617,14703,14801,14816,14964,15183,15471,15585,16471,16736,17208,17325,17330,17374,17623,17997,18018,18212,18218,18301,18318,18760,18811,18814,18820,18823,18844,18848,18872,19576,19620,19738,19887,40870,59244,59336,59367,59413,59417,59423,59431,59437,59443,59452,59460,59478,59493,63789,63866,63894,63976,63986,64016,64018,64021,64025,64034,64037,64042,65074,65093,65107,65112,65127,65132,65375,65510,65536],"gbChars":[0,36,38,45,50,81,89,95,96,100,103,104,105,109,126,133,148,172,175,179,208,306,307,308,309,310,311,312,313,341,428,443,544,545,558,741,742,749,750,805,819,820,7922,7924,7925,7927,7934,7943,7944,7945,7950,8062,8148,8149,8152,8164,8174,8236,8240,8262,8264,8374,8380,8381,8384,8388,8390,8392,8393,8394,8396,8401,8406,8416,8419,8424,8437,8439,8445,8482,8485,8496,8521,8603,8936,8946,9046,9050,9063,9066,9076,9092,9100,9108,9111,9113,9131,9162,9164,9218,9219,11329,11331,11334,11336,11346,11361,11363,11366,11370,11372,11375,11389,11682,11686,11687,11692,11694,11714,11716,11723,11725,11730,11736,11982,11989,12102,12336,12348,12350,12384,12393,12395,12397,12510,12553,12851,12962,12973,13738,13823,13919,13933,14080,14298,14585,14698,15583,15847,16318,16434,16438,16481,16729,17102,17122,17315,17320,17402,17418,17859,17909,17911,17915,17916,17936,17939,17961,18664,18703,18814,18962,19043,33469,33470,33471,33484,33485,33490,33497,33501,33505,33513,33520,33536,33550,37845,37921,37948,38029,38038,38064,38065,38066,38069,38075,38076,38078,39108,39109,39113,39114,39115,39116,39265,39394,189000]}
 },{}],30:[function(require,module,exports){
+module.exports={"uChars":[128,165,169,178,184,216,226,235,238,244,248,251,253,258,276,284,300,325,329,334,364,463,465,467,469,471,473,475,477,506,594,610,712,716,730,930,938,962,970,1026,1104,1106,8209,8215,8218,8222,8231,8241,8244,8246,8252,8365,8452,8454,8458,8471,8482,8556,8570,8596,8602,8713,8720,8722,8726,8731,8737,8740,8742,8748,8751,8760,8766,8777,8781,8787,8802,8808,8816,8854,8858,8870,8896,8979,9322,9372,9548,9588,9616,9622,9634,9652,9662,9672,9676,9680,9702,9735,9738,9793,9795,11906,11909,11913,11917,11928,11944,11947,11951,11956,11960,11964,11979,12284,12292,12312,12319,12330,12351,12436,12447,12535,12543,12586,12842,12850,12964,13200,13215,13218,13253,13263,13267,13270,13384,13428,13727,13839,13851,14617,14703,14801,14816,14964,15183,15471,15585,16471,16736,17208,17325,17330,17374,17623,17997,18018,18212,18218,18301,18318,18760,18811,18814,18820,18823,18844,18848,18872,19576,19620,19738,19887,40870,59244,59336,59367,59413,59417,59423,59431,59437,59443,59452,59460,59478,59493,63789,63866,63894,63976,63986,64016,64018,64021,64025,64034,64037,64042,65074,65093,65107,65112,65127,65132,65375,65510,65536],"gbChars":[0,36,38,45,50,81,89,95,96,100,103,104,105,109,126,133,148,172,175,179,208,306,307,308,309,310,311,312,313,341,428,443,544,545,558,741,742,749,750,805,819,820,7922,7924,7925,7927,7934,7943,7944,7945,7950,8062,8148,8149,8152,8164,8174,8236,8240,8262,8264,8374,8380,8381,8384,8388,8390,8392,8393,8394,8396,8401,8406,8416,8419,8424,8437,8439,8445,8482,8485,8496,8521,8603,8936,8946,9046,9050,9063,9066,9076,9092,9100,9108,9111,9113,9131,9162,9164,9218,9219,11329,11331,11334,11336,11346,11361,11363,11366,11370,11372,11375,11389,11682,11686,11687,11692,11694,11714,11716,11723,11725,11730,11736,11982,11989,12102,12336,12348,12350,12384,12393,12395,12397,12510,12553,12851,12962,12973,13738,13823,13919,13933,14080,14298,14585,14698,15583,15847,16318,16434,16438,16481,16729,17102,17122,17315,17320,17402,17418,17859,17909,17911,17915,17916,17936,17939,17961,18664,18703,18814,18962,19043,33469,33470,33471,33484,33485,33490,33497,33501,33505,33513,33520,33536,33550,37845,37921,37948,38029,38038,38064,38065,38066,38069,38075,38076,38078,39108,39109,39113,39114,39115,39116,39265,39394,189000]}
+},{}],31:[function(require,module,exports){
 module.exports=[
 ["a140","",62],
 ["a180","",32],
@@ -6360,7 +6856,7 @@ module.exports=[
 ["8135f437",""]
 ]
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",128],
 ["a1","｡",62],
@@ -6487,7 +6983,7 @@ module.exports=[
 ["fc40","髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑"]
 ]
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -6686,7 +7182,7 @@ function detectEncoding(bufs, defaultEncoding) {
 
 
 
-},{"safer-buffer":41}],33:[function(require,module,exports){
+},{"safer-buffer":42}],34:[function(require,module,exports){
 'use strict';
 
 var Buffer = require('safer-buffer').Buffer;
@@ -7007,7 +7503,7 @@ function detectEncoding(bufs, defaultEncoding) {
     return defaultEncoding || 'utf-32le';
 }
 
-},{"safer-buffer":41}],34:[function(require,module,exports){
+},{"safer-buffer":42}],35:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -7299,7 +7795,7 @@ Utf7IMAPDecoder.prototype.end = function() {
 
 
 
-},{"safer-buffer":41}],35:[function(require,module,exports){
+},{"safer-buffer":42}],36:[function(require,module,exports){
 "use strict";
 
 var BOMChar = '\uFEFF';
@@ -7353,7 +7849,7 @@ StripBOMWrapper.prototype.end = function() {
 }
 
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 "use strict";
 
 var Buffer = require("safer-buffer").Buffer;
@@ -7535,7 +8031,7 @@ if ("Ā" != "\u0100") {
     console.error("iconv-lite warning: js files use non-utf8 encoding. See https://github.com/ashtuchkin/iconv-lite/wiki/Javascript-source-file-encodings for more info.");
 }
 
-},{"../encodings":19,"./bom-handling":35,"./streams":37,"safer-buffer":41,"stream":13}],37:[function(require,module,exports){
+},{"../encodings":20,"./bom-handling":36,"./streams":38,"safer-buffer":42,"stream":14}],38:[function(require,module,exports){
 "use strict";
 
 var Buffer = require("safer-buffer").Buffer;
@@ -7646,7 +8142,7 @@ module.exports = function(stream_module) {
     };
 };
 
-},{"safer-buffer":41}],38:[function(require,module,exports){
+},{"safer-buffer":42}],39:[function(require,module,exports){
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -7733,7 +8229,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -7919,7 +8415,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -7983,7 +8479,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":14}],41:[function(require,module,exports){
+},{"buffer":15}],42:[function(require,module,exports){
 (function (process){(function (){
 /* eslint-disable node/no-deprecated-api */
 
@@ -8064,7 +8560,7 @@ if (!safer.constants) {
 module.exports = safer
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":39,"buffer":14}],42:[function(require,module,exports){
+},{"_process":40,"buffer":15}],43:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -8361,5 +8857,5 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":40}]},{},[3])(3)
+},{"safe-buffer":41}]},{},[4])(4)
 });

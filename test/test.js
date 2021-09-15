@@ -53,3 +53,21 @@ describe('i18nextOptions', () => {
     expect(res).to.eql(fixtures.example_persistMsgIdPlural.jsi18next)
   })
 })
+
+describe('i18next v4', () => {
+  test('po2i18next', (fn) => () => {
+    const res2 = fn(fixtures.example.poi18nextV4, {
+      compatibilityJSON: 'v4'
+    })
+    expect(res2).to.eql(fixtures.example.jsi18nextV4)
+  })
+
+  test('i18next2po', (fn) => () => {
+    const res = fn('en-US', fixtures.example.jsi18nextV4, {
+      compatibilityJSON: 'v4',
+      potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
+      poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
+    })
+    expect(res).to.eql(fixtures.example.poi18nextV4)
+  })
+})

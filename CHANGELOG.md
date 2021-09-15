@@ -1,3 +1,7 @@
+### 1.1.0
+
+- introduce i18next v4 json format support
+
 ### 1.0.8
 
 - plurals fix for kk
