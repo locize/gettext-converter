@@ -620,9 +620,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = i18next2po;
-
-var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
+exports.default = i18next2js;
 
 var _flatten = _interopRequireDefault(require("./flatten.js"));
 
@@ -781,9 +779,8 @@ var parseGettext = function parseGettext(locale, data) {
   return out;
 };
 
-function i18next2po(locale, body) {
+function i18next2js(locale, body) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var data;
   var flat = (0, _flatten.default)(typeof body === 'string' ? JSON.parse(body) : body, options, locale);
 
   if (options.base) {
@@ -797,15 +794,35 @@ function i18next2po(locale, body) {
         }
       }
     });
-    data = parseGettext(locale, bflat, options);
+    return parseGettext(locale, bflat, options);
   }
 
-  data = parseGettext(locale, flat, options);
+  return parseGettext(locale, flat, options);
+}
+
+module.exports = exports.default;
+},{"./flatten.js":2,"./plurals.js":8}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = i18next2po;
+
+var _i18next2js = _interopRequireDefault(require("./i18next2js.js"));
+
+var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function i18next2po(locale, body) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var data = (0, _i18next2js.default)(locale, body, options);
   return (0, _poCompiler.default)(data, options);
 }
 
 module.exports = exports.default;
-},{"./flatten.js":2,"./plurals.js":7,"./poCompiler.js":10}],4:[function(require,module,exports){
+},{"./i18next2js.js":3,"./poCompiler.js":11}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -835,6 +852,12 @@ Object.defineProperty(exports, "po2i18next", {
     return _po2i18next.default;
   }
 });
+Object.defineProperty(exports, "i18next2js", {
+  enumerable: true,
+  get: function get() {
+    return _i18next2js.default;
+  }
+});
 Object.defineProperty(exports, "i18next2po", {
   enumerable: true,
   get: function get() {
@@ -851,6 +874,8 @@ var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
 
 var _po2i18next = _interopRequireDefault(require("./po2i18next.js"));
 
+var _i18next2js = _interopRequireDefault(require("./i18next2js.js"));
+
 var _i18next2po = _interopRequireDefault(require("./i18next2po.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -860,10 +885,11 @@ var _default = {
   js2po: _js2po.default,
   js2i18next: _js2i18next.default,
   po2i18next: _po2i18next.default,
+  i18next2js: _i18next2js.default,
   i18next2po: _i18next2po.default
 };
 exports.default = _default;
-},{"./i18next2po.js":3,"./js2i18next.js":5,"./js2po.js":6,"./po2i18next.js":8,"./po2js.js":9}],5:[function(require,module,exports){
+},{"./i18next2js.js":3,"./i18next2po.js":4,"./js2i18next.js":6,"./js2po.js":7,"./po2i18next.js":9,"./po2js.js":10}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1015,7 +1041,7 @@ function _default(js) {
 }
 
 module.exports = exports.default;
-},{"./cldrConv.js":1,"./plurals.js":7}],6:[function(require,module,exports){
+},{"./cldrConv.js":1,"./plurals.js":8}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1032,7 +1058,7 @@ function js2po(table, options) {
 }
 
 module.exports = exports.default;
-},{"./poCompiler.js":10}],7:[function(require,module,exports){
+},{"./poCompiler.js":11}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1168,7 +1194,7 @@ sets.forEach(function (set) {
 var _default = rules;
 exports.default = _default;
 module.exports = exports.default;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1188,7 +1214,7 @@ function po2i18next(fileContents, options) {
 }
 
 module.exports = exports.default;
-},{"./js2i18next.js":5,"./po2js.js":9}],9:[function(require,module,exports){
+},{"./js2i18next.js":6,"./po2js.js":10}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1205,7 +1231,7 @@ function po2js(fileContents, options) {
 }
 
 module.exports = exports.default;
-},{"./poParser.js":11}],10:[function(require,module,exports){
+},{"./poParser.js":12}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1375,7 +1401,7 @@ function _default() {
 }
 
 module.exports = exports.default;
-},{"./shared.js":12,"content-type":16,"encoding":17}],11:[function(require,module,exports){
+},{"./shared.js":13,"content-type":17,"encoding":18}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1742,7 +1768,7 @@ function _default(fileContents) {
 }
 
 module.exports = exports.default;
-},{"./shared.js":12,"encoding":17}],12:[function(require,module,exports){
+},{"./shared.js":13,"encoding":18}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1813,7 +1839,7 @@ function generateHeader() {
     return "".concat(key, ": ").concat((header[key] || '').trim());
   }).join('\n') + '\n';
 }
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -1965,9 +1991,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],14:[function(require,module,exports){
-
 },{}],15:[function(require,module,exports){
+
+},{}],16:[function(require,module,exports){
 (function (Buffer){(function (){
 /*!
  * The buffer module from node.js, for the browser.
@@ -3748,7 +3774,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"base64-js":13,"buffer":15,"ieee754":39}],16:[function(require,module,exports){
+},{"base64-js":14,"buffer":16,"ieee754":40}],17:[function(require,module,exports){
 /*!
  * content-type
  * Copyright(c) 2015 Douglas Christopher Wilson
@@ -3972,7 +3998,7 @@ function ContentType (type) {
   this.type = type
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 (function (Buffer){(function (){
 'use strict';
 
@@ -4059,7 +4085,7 @@ function checkEncoding(name) {
 }
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"buffer":15,"iconv-lite":37}],18:[function(require,module,exports){
+},{"buffer":16,"iconv-lite":38}],19:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -4658,7 +4684,7 @@ function findIdx(table, val) {
 }
 
 
-},{"safer-buffer":42}],19:[function(require,module,exports){
+},{"safer-buffer":43}],20:[function(require,module,exports){
 "use strict";
 
 // Description of supported double byte encodings and aliases.
@@ -4836,7 +4862,7 @@ module.exports = {
     'xxbig5': 'big5hkscs',
 };
 
-},{"./tables/big5-added.json":25,"./tables/cp936.json":26,"./tables/cp949.json":27,"./tables/cp950.json":28,"./tables/eucjp.json":29,"./tables/gb18030-ranges.json":30,"./tables/gbk-added.json":31,"./tables/shiftjis.json":32}],20:[function(require,module,exports){
+},{"./tables/big5-added.json":26,"./tables/cp936.json":27,"./tables/cp949.json":28,"./tables/cp950.json":29,"./tables/eucjp.json":30,"./tables/gb18030-ranges.json":31,"./tables/gbk-added.json":32,"./tables/shiftjis.json":33}],21:[function(require,module,exports){
 "use strict";
 
 // Update this array if you add/rename/remove files in this directory.
@@ -4861,7 +4887,7 @@ for (var i = 0; i < modules.length; i++) {
             exports[enc] = module[enc];
 }
 
-},{"./dbcs-codec":18,"./dbcs-data":19,"./internal":21,"./sbcs-codec":22,"./sbcs-data":24,"./sbcs-data-generated":23,"./utf16":33,"./utf32":34,"./utf7":35}],21:[function(require,module,exports){
+},{"./dbcs-codec":19,"./dbcs-data":20,"./internal":22,"./sbcs-codec":23,"./sbcs-data":25,"./sbcs-data-generated":24,"./utf16":34,"./utf32":35,"./utf7":36}],22:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -5061,7 +5087,7 @@ InternalDecoderCesu8.prototype.end = function() {
     return res;
 }
 
-},{"safer-buffer":42,"string_decoder":43}],22:[function(require,module,exports){
+},{"safer-buffer":43,"string_decoder":44}],23:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -5135,7 +5161,7 @@ SBCSDecoder.prototype.write = function(buf) {
 SBCSDecoder.prototype.end = function() {
 }
 
-},{"safer-buffer":42}],23:[function(require,module,exports){
+},{"safer-buffer":43}],24:[function(require,module,exports){
 "use strict";
 
 // Generated data for sbcs codec. Don't edit manually. Regenerate using generation/gen-sbcs.js script.
@@ -5587,7 +5613,7 @@ module.exports = {
     "chars": "���������������������������������กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุู����฿เแโใไๅๆ็่้๊๋์ํ๎๏๐๑๒๓๔๕๖๗๘๙๚๛����"
   }
 }
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 "use strict";
 
 // Manually added data to be used by sbcs codec in addition to generated one.
@@ -5768,7 +5794,7 @@ module.exports = {
 };
 
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 module.exports=[
 ["8740","䏰䰲䘃䖦䕸𧉧䵷䖳𧲱䳢𧳅㮕䜶䝄䱇䱀𤊿𣘗𧍒𦺋𧃒䱗𪍑䝏䗚䲅𧱬䴇䪤䚡𦬣爥𥩔𡩣𣸆𣽡晍囻"],
 ["8767","綕夝𨮹㷴霴𧯯寛𡵞媤㘥𩺰嫑宷峼杮薓𩥅瑡璝㡵𡵓𣚞𦀡㻬"],
@@ -5892,7 +5918,7 @@ module.exports=[
 ["fea1","𤅟𤩹𨮏孆𨰃𡢞瓈𡦈甎瓩甞𨻙𡩋寗𨺬鎅畍畊畧畮𤾂㼄𤴓疎瑝疞疴瘂瘬癑癏癯癶𦏵皐臯㟸𦤑𦤎皡皥皷盌𦾟葢𥂝𥅽𡸜眞眦着撯𥈠睘𣊬瞯𨥤𨥨𡛁矴砉𡍶𤨒棊碯磇磓隥礮𥗠磗礴碱𧘌辸袄𨬫𦂃𢘜禆褀椂禀𥡗禝𧬹礼禩渪𧄦㺨秆𩄍秔"]
 ]
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127,"€"],
 ["8140","丂丄丅丆丏丒丗丟丠両丣並丩丮丯丱丳丵丷丼乀乁乂乄乆乊乑乕乗乚乛乢乣乤乥乧乨乪",5,"乲乴",9,"乿",6,"亇亊"],
@@ -6158,7 +6184,7 @@ module.exports=[
 ["fe40","兀嗀﨎﨏﨑﨓﨔礼﨟蘒﨡﨣﨤﨧﨨﨩"]
 ]
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127],
 ["8141","갂갃갅갆갋",4,"갘갞갟갡갢갣갥",6,"갮갲갳갴"],
@@ -6433,7 +6459,7 @@ module.exports=[
 ["fda1","爻肴酵驍侯候厚后吼喉嗅帿後朽煦珝逅勛勳塤壎焄熏燻薰訓暈薨喧暄煊萱卉喙毁彙徽揮暉煇諱輝麾休携烋畦虧恤譎鷸兇凶匈洶胸黑昕欣炘痕吃屹紇訖欠欽歆吸恰洽翕興僖凞喜噫囍姬嬉希憙憘戱晞曦熙熹熺犧禧稀羲詰"]
 ]
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127],
 ["a140","　，、。．‧；：？！︰…‥﹐﹑﹒·﹔﹕﹖﹗｜–︱—︳╴︴﹏（）︵︶｛｝︷︸〔〕︹︺【】︻︼《》︽︾〈〉︿﹀「」﹁﹂『』﹃﹄﹙﹚"],
@@ -6612,7 +6638,7 @@ module.exports=[
 ["f9a1","龤灨灥糷虪蠾蠽蠿讞貜躩軉靋顳顴飌饡馫驤驦驧鬤鸕鸗齈戇欞爧虌躨钂钀钁驩驨鬮鸙爩虋讟钃鱹麷癵驫鱺鸝灩灪麤齾齉龘碁銹裏墻恒粧嫺╔╦╗╠╬╣╚╩╝╒╤╕╞╪╡╘╧╛╓╥╖╟╫╢╙╨╜║═╭╮╰╯▓"]
 ]
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",127],
 ["8ea1","｡",62],
@@ -6796,9 +6822,9 @@ module.exports=[
 ["8feda1","黸黿鼂鼃鼉鼏鼐鼑鼒鼔鼖鼗鼙鼚鼛鼟鼢鼦鼪鼫鼯鼱鼲鼴鼷鼹鼺鼼鼽鼿齁齃",4,"齓齕齖齗齘齚齝齞齨齩齭",4,"齳齵齺齽龏龐龑龒龔龖龗龞龡龢龣龥"]
 ]
 
-},{}],30:[function(require,module,exports){
-module.exports={"uChars":[128,165,169,178,184,216,226,235,238,244,248,251,253,258,276,284,300,325,329,334,364,463,465,467,469,471,473,475,477,506,594,610,712,716,730,930,938,962,970,1026,1104,1106,8209,8215,8218,8222,8231,8241,8244,8246,8252,8365,8452,8454,8458,8471,8482,8556,8570,8596,8602,8713,8720,8722,8726,8731,8737,8740,8742,8748,8751,8760,8766,8777,8781,8787,8802,8808,8816,8854,8858,8870,8896,8979,9322,9372,9548,9588,9616,9622,9634,9652,9662,9672,9676,9680,9702,9735,9738,9793,9795,11906,11909,11913,11917,11928,11944,11947,11951,11956,11960,11964,11979,12284,12292,12312,12319,12330,12351,12436,12447,12535,12543,12586,12842,12850,12964,13200,13215,13218,13253,13263,13267,13270,13384,13428,13727,13839,13851,14617,14703,14801,14816,14964,15183,15471,15585,16471,16736,17208,17325,17330,17374,17623,17997,18018,18212,18218,18301,18318,18760,18811,18814,18820,18823,18844,18848,18872,19576,19620,19738,19887,40870,59244,59336,59367,59413,59417,59423,59431,59437,59443,59452,59460,59478,59493,63789,63866,63894,63976,63986,64016,64018,64021,64025,64034,64037,64042,65074,65093,65107,65112,65127,65132,65375,65510,65536],"gbChars":[0,36,38,45,50,81,89,95,96,100,103,104,105,109,126,133,148,172,175,179,208,306,307,308,309,310,311,312,313,341,428,443,544,545,558,741,742,749,750,805,819,820,7922,7924,7925,7927,7934,7943,7944,7945,7950,8062,8148,8149,8152,8164,8174,8236,8240,8262,8264,8374,8380,8381,8384,8388,8390,8392,8393,8394,8396,8401,8406,8416,8419,8424,8437,8439,8445,8482,8485,8496,8521,8603,8936,8946,9046,9050,9063,9066,9076,9092,9100,9108,9111,9113,9131,9162,9164,9218,9219,11329,11331,11334,11336,11346,11361,11363,11366,11370,11372,11375,11389,11682,11686,11687,11692,11694,11714,11716,11723,11725,11730,11736,11982,11989,12102,12336,12348,12350,12384,12393,12395,12397,12510,12553,12851,12962,12973,13738,13823,13919,13933,14080,14298,14585,14698,15583,15847,16318,16434,16438,16481,16729,17102,17122,17315,17320,17402,17418,17859,17909,17911,17915,17916,17936,17939,17961,18664,18703,18814,18962,19043,33469,33470,33471,33484,33485,33490,33497,33501,33505,33513,33520,33536,33550,37845,37921,37948,38029,38038,38064,38065,38066,38069,38075,38076,38078,39108,39109,39113,39114,39115,39116,39265,39394,189000]}
 },{}],31:[function(require,module,exports){
+module.exports={"uChars":[128,165,169,178,184,216,226,235,238,244,248,251,253,258,276,284,300,325,329,334,364,463,465,467,469,471,473,475,477,506,594,610,712,716,730,930,938,962,970,1026,1104,1106,8209,8215,8218,8222,8231,8241,8244,8246,8252,8365,8452,8454,8458,8471,8482,8556,8570,8596,8602,8713,8720,8722,8726,8731,8737,8740,8742,8748,8751,8760,8766,8777,8781,8787,8802,8808,8816,8854,8858,8870,8896,8979,9322,9372,9548,9588,9616,9622,9634,9652,9662,9672,9676,9680,9702,9735,9738,9793,9795,11906,11909,11913,11917,11928,11944,11947,11951,11956,11960,11964,11979,12284,12292,12312,12319,12330,12351,12436,12447,12535,12543,12586,12842,12850,12964,13200,13215,13218,13253,13263,13267,13270,13384,13428,13727,13839,13851,14617,14703,14801,14816,14964,15183,15471,15585,16471,16736,17208,17325,17330,17374,17623,17997,18018,18212,18218,18301,18318,18760,18811,18814,18820,18823,18844,18848,18872,19576,19620,19738,19887,40870,59244,59336,59367,59413,59417,59423,59431,59437,59443,59452,59460,59478,59493,63789,63866,63894,63976,63986,64016,64018,64021,64025,64034,64037,64042,65074,65093,65107,65112,65127,65132,65375,65510,65536],"gbChars":[0,36,38,45,50,81,89,95,96,100,103,104,105,109,126,133,148,172,175,179,208,306,307,308,309,310,311,312,313,341,428,443,544,545,558,741,742,749,750,805,819,820,7922,7924,7925,7927,7934,7943,7944,7945,7950,8062,8148,8149,8152,8164,8174,8236,8240,8262,8264,8374,8380,8381,8384,8388,8390,8392,8393,8394,8396,8401,8406,8416,8419,8424,8437,8439,8445,8482,8485,8496,8521,8603,8936,8946,9046,9050,9063,9066,9076,9092,9100,9108,9111,9113,9131,9162,9164,9218,9219,11329,11331,11334,11336,11346,11361,11363,11366,11370,11372,11375,11389,11682,11686,11687,11692,11694,11714,11716,11723,11725,11730,11736,11982,11989,12102,12336,12348,12350,12384,12393,12395,12397,12510,12553,12851,12962,12973,13738,13823,13919,13933,14080,14298,14585,14698,15583,15847,16318,16434,16438,16481,16729,17102,17122,17315,17320,17402,17418,17859,17909,17911,17915,17916,17936,17939,17961,18664,18703,18814,18962,19043,33469,33470,33471,33484,33485,33490,33497,33501,33505,33513,33520,33536,33550,37845,37921,37948,38029,38038,38064,38065,38066,38069,38075,38076,38078,39108,39109,39113,39114,39115,39116,39265,39394,189000]}
+},{}],32:[function(require,module,exports){
 module.exports=[
 ["a140","",62],
 ["a180","",32],
@@ -6856,7 +6882,7 @@ module.exports=[
 ["8135f437",""]
 ]
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 module.exports=[
 ["0","\u0000",128],
 ["a1","｡",62],
@@ -6983,7 +7009,7 @@ module.exports=[
 ["fc40","髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑"]
 ]
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -7182,7 +7208,7 @@ function detectEncoding(bufs, defaultEncoding) {
 
 
 
-},{"safer-buffer":42}],34:[function(require,module,exports){
+},{"safer-buffer":43}],35:[function(require,module,exports){
 'use strict';
 
 var Buffer = require('safer-buffer').Buffer;
@@ -7503,7 +7529,7 @@ function detectEncoding(bufs, defaultEncoding) {
     return defaultEncoding || 'utf-32le';
 }
 
-},{"safer-buffer":42}],35:[function(require,module,exports){
+},{"safer-buffer":43}],36:[function(require,module,exports){
 "use strict";
 var Buffer = require("safer-buffer").Buffer;
 
@@ -7795,7 +7821,7 @@ Utf7IMAPDecoder.prototype.end = function() {
 
 
 
-},{"safer-buffer":42}],36:[function(require,module,exports){
+},{"safer-buffer":43}],37:[function(require,module,exports){
 "use strict";
 
 var BOMChar = '\uFEFF';
@@ -7849,7 +7875,7 @@ StripBOMWrapper.prototype.end = function() {
 }
 
 
-},{}],37:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 "use strict";
 
 var Buffer = require("safer-buffer").Buffer;
@@ -8031,7 +8057,7 @@ if ("Ā" != "\u0100") {
     console.error("iconv-lite warning: js files use non-utf8 encoding. See https://github.com/ashtuchkin/iconv-lite/wiki/Javascript-source-file-encodings for more info.");
 }
 
-},{"../encodings":20,"./bom-handling":36,"./streams":38,"safer-buffer":42,"stream":14}],38:[function(require,module,exports){
+},{"../encodings":21,"./bom-handling":37,"./streams":39,"safer-buffer":43,"stream":15}],39:[function(require,module,exports){
 "use strict";
 
 var Buffer = require("safer-buffer").Buffer;
@@ -8142,7 +8168,7 @@ module.exports = function(stream_module) {
     };
 };
 
-},{"safer-buffer":42}],39:[function(require,module,exports){
+},{"safer-buffer":43}],40:[function(require,module,exports){
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -8229,7 +8255,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -8415,7 +8441,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -8479,7 +8505,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":15}],42:[function(require,module,exports){
+},{"buffer":16}],43:[function(require,module,exports){
 (function (process){(function (){
 /* eslint-disable node/no-deprecated-api */
 
@@ -8560,7 +8586,7 @@ if (!safer.constants) {
 module.exports = safer
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":40,"buffer":15}],43:[function(require,module,exports){
+},{"_process":41,"buffer":16}],44:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -8857,5 +8883,5 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":41}]},{},[4])(4)
+},{"safe-buffer":42}]},{},[5])(5)
 });

@@ -1,3 +1,7 @@
+### 1.1.1
+
+- separate i18next2js
+
 ### 1.1.0
 
 - introduce i18next v4 json format support
