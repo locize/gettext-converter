@@ -1,3 +1,7 @@
+### 1.2.0
+
+- compatibility with i18next-conv
+
 ### 1.1.3
 
 - fix esm import
