@@ -1,3 +1,7 @@
+### 1.1.2
+
+- overriding the plurals option for i18next-gettext-converter
+
 ### 1.1.1
 
 - separate i18next2js
