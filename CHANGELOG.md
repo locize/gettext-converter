@@ -1,3 +1,7 @@
+### 1.1.3
+
+- fix esm import
+
 ### 1.1.2
 
 - overriding the plurals option for i18next-gettext-converter
