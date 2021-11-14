@@ -73,6 +73,7 @@
   },
   "module": "./esm/index.js",
   "dependencies": {
+    "arrify": "^2.0.1",
     "content-type": "1.0.4",
     "encoding": "0.1.13"
   },

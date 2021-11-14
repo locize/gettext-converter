@@ -15,12 +15,12 @@
             "\"\\'\t": {
                 "msgctxt": "",
                 "msgid": "\"\\'\t",
-                "msgstr": "\"\\'\t"
+                "msgstr": ["\"\\'\t"]
             },
             "o1": {
                 "msgctxt": "",
                 "msgid": "o1",
-                "msgstr": "t1"
+                "msgstr": ["t1"]
             },
             "o2-1": {
                 "msgctxt": "",
@@ -34,33 +34,33 @@
             "o3-\u00f5\u00e4\u00f6\u00fc": {
                 "msgctxt": "",
                 "msgid": "o3-\u00f5\u00e4\u00f6\u00fc",
-                "msgstr": "t3-\u017e\u0161"
+                "msgstr": ["t3-\u017e\u0161"]
             },
             "test": {
                 "msgctxt": "",
                 "msgid": "test",
-                "msgstr": "test"
+                "msgstr": ["test"]
             }
         },
         "Button label": {
             "Log in": {
                 "msgctxt": "Button label",
                 "msgid": "Log in",
-                "msgstr": ""
+                "msgstr": [""]
             }
         },
         "Dialog title": {
             "Log in": {
                 "msgctxt": "Dialog title",
                 "msgid": "Log in",
-                "msgstr": ""
+                "msgstr": [""]
             }
         },
         "c1": {
             "co1": {
                 "msgctxt": "c1",
                 "msgid": "co1",
-                "msgstr": "ct1"
+                "msgstr": ["ct1"]
             }
         },
         "c2": {
