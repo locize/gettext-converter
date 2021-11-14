@@ -828,30 +828,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "po2js", {
-  enumerable: true,
-  get: function get() {
-    return _po2js.default;
-  }
-});
-Object.defineProperty(exports, "js2po", {
-  enumerable: true,
-  get: function get() {
-    return _js2po.default;
-  }
-});
-Object.defineProperty(exports, "js2i18next", {
-  enumerable: true,
-  get: function get() {
-    return _js2i18next.default;
-  }
-});
-Object.defineProperty(exports, "po2i18next", {
-  enumerable: true,
-  get: function get() {
-    return _po2i18next.default;
-  }
-});
+exports.default = void 0;
 Object.defineProperty(exports, "i18next2js", {
   enumerable: true,
   get: function get() {
@@ -864,7 +841,30 @@ Object.defineProperty(exports, "i18next2po", {
     return _i18next2po.default;
   }
 });
-exports.default = void 0;
+Object.defineProperty(exports, "js2i18next", {
+  enumerable: true,
+  get: function get() {
+    return _js2i18next.default;
+  }
+});
+Object.defineProperty(exports, "js2po", {
+  enumerable: true,
+  get: function get() {
+    return _js2po.default;
+  }
+});
+Object.defineProperty(exports, "po2i18next", {
+  enumerable: true,
+  get: function get() {
+    return _po2i18next.default;
+  }
+});
+Object.defineProperty(exports, "po2js", {
+  enumerable: true,
+  get: function get() {
+    return _po2js.default;
+  }
+});
 
 var _po2js = _interopRequireDefault(require("./po2js.js"));
 
@@ -1774,10 +1774,11 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.HEADERS = void 0;
 exports.compareMsgid = compareMsgid;
 exports.foldLine = foldLine;
+exports.formatCharset = void 0;
 exports.generateHeader = generateHeader;
-exports.formatCharset = exports.HEADERS = void 0;
 var HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
 exports.HEADERS = HEADERS;
 
@@ -4854,7 +4855,19 @@ module.exports = {
     'big5hkscs': {
         type: '_dbcs',
         table: function() { return require('./tables/cp950.json').concat(require('./tables/big5-added.json')) },
-        encodeSkipVals: [0xa2cc],
+        encodeSkipVals: [
+            // Although Encoding Standard says we should avoid encoding to HKSCS area (See Step 1 of
+            // https://encoding.spec.whatwg.org/#index-big5-pointer), we still do it to increase compatibility with ICU.
+            // But if a single unicode point can be encoded both as HKSCS and regular Big5, we prefer the latter.
+            0x8e69, 0x8e6f, 0x8e7e, 0x8eab, 0x8eb4, 0x8ecd, 0x8ed0, 0x8f57, 0x8f69, 0x8f6e, 0x8fcb, 0x8ffe,
+            0x906d, 0x907a, 0x90c4, 0x90dc, 0x90f1, 0x91bf, 0x92af, 0x92b0, 0x92b1, 0x92b2, 0x92d1, 0x9447, 0x94ca,
+            0x95d9, 0x96fc, 0x9975, 0x9b76, 0x9b78, 0x9b7b, 0x9bc6, 0x9bde, 0x9bec, 0x9bf6, 0x9c42, 0x9c53, 0x9c62,
+            0x9c68, 0x9c6b, 0x9c77, 0x9cbc, 0x9cbd, 0x9cd0, 0x9d57, 0x9d5a, 0x9dc4, 0x9def, 0x9dfb, 0x9ea9, 0x9eef,
+            0x9efd, 0x9f60, 0x9fcb, 0xa077, 0xa0dc, 0xa0df, 0x8fcc, 0x92c8, 0x9644, 0x96ed,
+
+            // Step 2 of https://encoding.spec.whatwg.org/#index-big5-pointer: Use last pointer for U+2550, U+255E, U+2561, U+256A, U+5341, or U+5345
+            0xa2a4, 0xa2a5, 0xa2a7, 0xa2a6, 0xa2cc, 0xa2ce,
+        ],
     },
 
     'cnbig5': 'big5hkscs',
@@ -8442,6 +8455,7 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],42:[function(require,module,exports){
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -8463,6 +8477,8 @@ if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow)
 function SafeBuffer (arg, encodingOrOffset, length) {
   return Buffer(arg, encodingOrOffset, length)
 }
+
+SafeBuffer.prototype = Object.create(Buffer.prototype)
 
 // Copy static methods from Buffer
 copyProps(Buffer, SafeBuffer)

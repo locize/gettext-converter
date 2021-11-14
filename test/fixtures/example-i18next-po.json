@@ -1,0 +1,78 @@
+{
+    "charset": "utf-8",
+    "headers": {
+        "content-transfer-encoding": "8bit",
+        "content-type": "text/plain; charset=utf-8",
+        "language": "en-US",
+        "mime-version": "1.0",
+        "plural-forms": "nplurals=2; plural=(n != 1)",
+        "po-revision-date": "2020-04-17T10:46:16.313Z",
+        "pot-creation-date": "2020-04-17T10:46:16.313Z",
+        "project-id-version": "gettext-converter"
+    },
+    "translations": {
+        "": {
+            "\"\\'\t": {
+                "msgctxt": "",
+                "msgid": "\"\\'\t",
+                "msgstr": "\"\\'\t"
+            },
+            "o1": {
+                "msgctxt": "",
+                "msgid": "o1",
+                "msgstr": "t1"
+            },
+            "o2-1": {
+                "msgctxt": "",
+                "msgid": "o2-1",
+                "msgid_plural": "o2-1",
+                "msgstr": [
+                    "t2-1",
+                    "t2-2"
+                ]
+            },
+            "o3-\u00f5\u00e4\u00f6\u00fc": {
+                "msgctxt": "",
+                "msgid": "o3-\u00f5\u00e4\u00f6\u00fc",
+                "msgstr": "t3-\u017e\u0161"
+            },
+            "test": {
+                "msgctxt": "",
+                "msgid": "test",
+                "msgstr": "test"
+            }
+        },
+        "Button label": {
+            "Log in": {
+                "msgctxt": "Button label",
+                "msgid": "Log in",
+                "msgstr": ""
+            }
+        },
+        "Dialog title": {
+            "Log in": {
+                "msgctxt": "Dialog title",
+                "msgid": "Log in",
+                "msgstr": ""
+            }
+        },
+        "c1": {
+            "co1": {
+                "msgctxt": "c1",
+                "msgid": "co1",
+                "msgstr": "ct1"
+            }
+        },
+        "c2": {
+            "co2-1": {
+                "msgctxt": "c2",
+                "msgid": "co2-1",
+                "msgid_plural": "co2-1",
+                "msgstr": [
+                    "ct2-1",
+                    "ct2-2"
+                ]
+            }
+        }
+    }
+}

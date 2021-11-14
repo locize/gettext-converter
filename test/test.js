@@ -30,6 +30,14 @@ test('po2i18next', (fn) => () => {
   expect(res2).to.eql(fixtures.example.jsi18next)
 })
 
+test('i18next2js', (fn) => () => {
+  const res = fn('en-US', fixtures.example.jsi18next, {
+    potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
+    poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
+  })
+  expect(res).to.eql(fixtures.example.i18nextjs)
+})
+
 test('i18next2po', (fn) => () => {
   const res = fn('en-US', fixtures.example.jsi18next, {
     potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
