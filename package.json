@@ -26,6 +26,10 @@
       "require": "./cjs/po2i18next.js",
       "default": "./esm/po2i18next.js"
     },
+    "./i18next2js": {
+      "require": "./cjs/i18next2js.js",
+      "default": "./esm/i18next2js.js"
+    },
     "./i18next2po": {
       "require": "./cjs/i18next2po.js",
       "default": "./esm/i18next2po.js"
