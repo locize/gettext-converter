@@ -1204,7 +1204,7 @@ var rulesPluralsTypes = {
 var rules = {};
 sets.forEach(function (set) {
   set.lngs.forEach(function (l) {
-    rules[l] = {
+    rules[l.toLowerCase()] = {
       numbers: set.nr,
       plurals: rulesPluralsTypes[set.fc]
     };
