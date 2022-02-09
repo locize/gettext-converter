@@ -1,0 +1,11 @@
+{
+  "o1": "t1",
+  "o2-1": "t2-1",
+  "o3-õäöü": "t3-žš",
+  "test": "test",
+  "\"\\'\t": "\"\\'\t",
+  "co1_c1": "ct1",
+  "co2-1_c2": "ct2-1",
+  "Log in_Button label": "",
+  "Log in_Dialog title": ""
+}

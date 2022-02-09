@@ -28,6 +28,8 @@ test('po2i18next', (fn) => () => {
   expect(res).to.eql(fixtures.example.jsi18next)
   const res2 = fn(fixtures.example.poi18next)
   expect(res2).to.eql(fixtures.example.jsi18next)
+  const res3 = fn(fixtures.example.poi18nextLanguageNoPlurals)
+  expect(res3).to.eql(fixtures.example.jsi18nextLanguageNoPlurals)
 })
 
 test('i18next2js', (fn) => () => {
