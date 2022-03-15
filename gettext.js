@@ -528,8 +528,13 @@ function _default(input) {
       if (isPlural && key.indexOf('_other') < 0) {
         form = key.substring(pluralIndex + 1);
         var oldSuffix = cldrRule.fromCldr[FORMS.indexOf(form)];
-        if (!oldSuffix) isPlural = false;
-        number = parseInt(oldSuffix.substring(1), 10);
+
+        if (!oldSuffix) {
+          isPlural = false;
+        } else {
+          number = parseInt(oldSuffix.substring(1), 10);
+        }
+
         if (number === 1) isPlural = false;
         key = key.substring(0, pluralIndex);
       } else if (key.indexOf('_other') > -1) {
@@ -630,7 +635,7 @@ var _options = require("./options.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var getGettextPluralPosition = function getGettextPluralPosition(ext, suffix) {
   if (ext) {
@@ -828,30 +833,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "po2js", {
-  enumerable: true,
-  get: function get() {
-    return _po2js.default;
-  }
-});
-Object.defineProperty(exports, "js2po", {
-  enumerable: true,
-  get: function get() {
-    return _js2po.default;
-  }
-});
-Object.defineProperty(exports, "js2i18next", {
-  enumerable: true,
-  get: function get() {
-    return _js2i18next.default;
-  }
-});
-Object.defineProperty(exports, "po2i18next", {
-  enumerable: true,
-  get: function get() {
-    return _po2i18next.default;
-  }
-});
+exports.default = void 0;
 Object.defineProperty(exports, "i18next2js", {
   enumerable: true,
   get: function get() {
@@ -864,7 +846,30 @@ Object.defineProperty(exports, "i18next2po", {
     return _i18next2po.default;
   }
 });
-exports.default = void 0;
+Object.defineProperty(exports, "js2i18next", {
+  enumerable: true,
+  get: function get() {
+    return _js2i18next.default;
+  }
+});
+Object.defineProperty(exports, "js2po", {
+  enumerable: true,
+  get: function get() {
+    return _js2po.default;
+  }
+});
+Object.defineProperty(exports, "po2i18next", {
+  enumerable: true,
+  get: function get() {
+    return _po2i18next.default;
+  }
+});
+Object.defineProperty(exports, "po2js", {
+  enumerable: true,
+  get: function get() {
+    return _po2js.default;
+  }
+});
 
 var _po2js = _interopRequireDefault(require("./po2js.js"));
 
@@ -1274,7 +1279,7 @@ var _shared = require("./shared.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var handleCharset = function handleCharset(table) {
   var ct = _contentType.default.parse(table.headers['Content-Type'] || 'text/plain');
@@ -1801,10 +1806,11 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.HEADERS = void 0;
 exports.compareMsgid = compareMsgid;
 exports.foldLine = foldLine;
+exports.formatCharset = void 0;
 exports.generateHeader = generateHeader;
-exports.formatCharset = exports.HEADERS = void 0;
 var HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
 exports.HEADERS = HEADERS;
 

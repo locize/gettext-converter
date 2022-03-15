@@ -1,3 +1,7 @@
+### 1.2.1
+
+- fix suffix fallback in flatten
+
 ### 1.2.0
 
 - compatibility with i18next-conv
