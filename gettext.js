@@ -425,7 +425,7 @@ function _default(input) {
   var flat = {};
 
   function handleOldFormat(appendTo, obj, parentKey) {
-    Object.keys(obj).forEach(function (m) {
+    Object.keys(obj || {}).forEach(function (m) {
       var kv;
       var key = parentKey;
       var context = '';

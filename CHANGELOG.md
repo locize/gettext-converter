@@ -1,3 +1,7 @@
+### 1.2.2
+
+- do not crash when ns is null
+
 ### 1.2.1
 
 - fix suffix fallback in flatten
