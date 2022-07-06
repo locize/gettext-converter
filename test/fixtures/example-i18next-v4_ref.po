@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gettext-converter\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2020-04-17T10:46:16.313Z\n"
+"PO-Revision-Date: 2020-04-17T10:46:16.313Z\n"
+"Language: en-US\n"
+
+#: o1
+msgid "t1"
+msgstr ""
+
+#: o2-1
+msgid "t2-1"
+msgid_plural "t2-2"
+msgstr[0] ""
+
+#: o3-õäöü
+msgid "t3-žš"
+msgstr ""
+
+#: test
+msgid "test"
+msgstr ""
+
+#: "\'		
+msgid "\"\\'\t"
+msgstr ""
+
+#: co1
+msgctxt "c1"
+msgid "ct1"
+msgstr ""
+
+#: co2-1
+msgctxt "c2"
+msgid "ct2-1"
+msgid_plural "ct2-2"
+msgstr[0] ""
+
+#: Log in
+msgctxt "Button label"
+msgid ""
+msgstr ""
+
+#: Log in
+msgctxt "Dialog title"
+msgid ""
+msgstr ""
