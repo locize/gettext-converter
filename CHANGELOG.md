@@ -1,3 +1,7 @@
+### 1.2.3
+
+- fix keyasareference option causes "corrupted" po file [7](https://github.com/locize/gettext-converter/pull/7)
+
 ### 1.2.2
 
 - do not crash when ns is null
