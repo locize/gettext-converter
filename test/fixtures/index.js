@@ -9,7 +9,8 @@ module.exports = {
     po: fs.readFileSync(path.join(__dirname, 'example.po')).toString().replace(/\n$/, ''),
     i18nextjs: require('./example-i18next-po.json'),
     poi18next: fs.readFileSync(path.join(__dirname, 'example-i18next.po')).toString().replace(/\n$/, ''),
-    poi18nextV4: fs.readFileSync(path.join(__dirname, 'example-i18next-v4.po')).toString().replace(/\n$/, '')
+    poi18nextV4: fs.readFileSync(path.join(__dirname, 'example-i18next-v4.po')).toString().replace(/\n$/, ''),
+    poi18nextV4_ref: fs.readFileSync(path.join(__dirname, 'example-i18next-v4_ref.po')).toString().replace(/\n$/, '')
   },
   example_persistMsgIdPlural: {
     jsi18next: require('./example_persistMsgIdPlural.json'),

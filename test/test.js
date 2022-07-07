@@ -77,5 +77,13 @@ describe('i18next v4', () => {
       poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
     })
     expect(res).to.eql(fixtures.example.poi18nextV4)
+
+    const resRef = fn('en-US', fixtures.example.jsi18nextV4, {
+      compatibilityJSON: 'v4',
+      keyasareference: true,
+      potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
+      poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
+    })
+    expect(resRef).to.eql(fixtures.example.poi18nextV4_ref)
   })
 })
