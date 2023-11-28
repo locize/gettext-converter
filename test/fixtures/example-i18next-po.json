@@ -17,6 +17,11 @@
                 "msgid": "\"\\'\t",
                 "msgstr": ["\"\\'\t"]
             },
+            "Nested empty key##": {
+                "msgctxt": "",
+                "msgid": "Nested empty key##",
+                "msgstr": ["test"]
+            },
             "o1": {
                 "msgctxt": "",
                 "msgid": "o1",

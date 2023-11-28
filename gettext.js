@@ -377,8 +377,7 @@ sets.forEach(function (set) {
     };
   });
 });
-var _default = rules;
-exports.default = _default;
+var _default = exports.default = rules;
 module.exports = exports.default;
 },{}],2:[function(require,module,exports){
 "use strict";
@@ -387,62 +386,46 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-
 var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
-
 var regexIndexOf = function regexIndexOf(value, regex, startpos) {
   var indexOf = value.substring(startpos || 0).search(regex);
   return indexOf >= 0 ? indexOf + (startpos || 0) : indexOf;
 };
-
 function _default(input) {
   var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-      _ref$keyseparator = _ref.keyseparator,
-      keyseparator = _ref$keyseparator === void 0 ? '##' : _ref$keyseparator,
-      _ref$ctxSeparator = _ref.ctxSeparator,
-      ctxSeparator = _ref$ctxSeparator === void 0 ? '_' : _ref$ctxSeparator,
-      ignorePlurals = _ref.ignorePlurals,
-      compatibilityJSON = _ref.compatibilityJSON,
-      language = _ref.language;
-
+    _ref$keyseparator = _ref.keyseparator,
+    keyseparator = _ref$keyseparator === void 0 ? '##' : _ref$keyseparator,
+    _ref$ctxSeparator = _ref.ctxSeparator,
+    ctxSeparator = _ref$ctxSeparator === void 0 ? '_' : _ref$ctxSeparator,
+    ignorePlurals = _ref.ignorePlurals,
+    compatibilityJSON = _ref.compatibilityJSON,
+    language = _ref.language;
   var locale = arguments.length > 2 ? arguments[2] : undefined;
   var flat = {};
-
   function handleOldFormat(appendTo, obj, parentKey) {
     Object.keys(obj || {}).forEach(function (m) {
       var kv;
       var key = parentKey;
       var context = '';
       var value = obj[m];
-
       if (key.length > 0) {
         key = key + keyseparator + m;
       } else {
         key = m;
       }
-
       var pluralIndex = key.indexOf('_plural');
       if (pluralIndex < 0) pluralIndex = regexIndexOf(key, /_\d+$/);
       var isPlural = pluralIndex > -1;
       if (ignorePlurals) isPlural = false;
       var number;
-
       if (isPlural && key.indexOf('_plural') < 0) {
         number = parseInt(key.substring(pluralIndex + 1), 10);
         if (number === 1) isPlural = false;
@@ -451,12 +434,9 @@ function _default(input) {
         number = 2;
         key = key.substring(0, pluralIndex);
       }
-
       var ctxKey = key;
-
       if (isPlural) {
         ctxKey = ctxKey.substring(0, pluralIndex);
-
         if (ctxKey.indexOf(ctxSeparator) > -1) {
           context = ctxKey.substring(ctxKey.lastIndexOf(ctxSeparator) + ctxSeparator.length, ctxKey.length);
         }
@@ -465,12 +445,10 @@ function _default(input) {
       } else {
         context = '';
       }
-
       if (context === key) context = '';
       if (context !== '') key = key.replace(ctxSeparator + context, '');
       var appendKey = key + context;
       if (isPlural) appendKey = "".concat(appendKey, "_").concat(number);
-
       if (typeof value === 'string') {
         kv = {
           key: key,
@@ -495,46 +473,37 @@ function _default(input) {
       }
     });
   }
-
   function handleNewFormat(appendTo, obj, parentKey) {
     Object.keys(obj).forEach(function (m) {
       var kv;
       var key = parentKey;
       var context = '';
       var value = obj[m];
-
       if (key.length > 0) {
         key = key + keyseparator + m;
       } else {
         key = m;
       }
-
       var pluralIndex = key.indexOf('_other');
       if (pluralIndex < 0) pluralIndex = regexIndexOf(key, new RegExp("_(".concat(FORMS.join('|'), ")$")));
       var isPlural = pluralIndex > -1;
       var code = locale || language;
-
       var cldrRule = _cldrConv.default[code] || _cldrConv.default[code.split(/-|_/)[0]];
-
       if (!cldrRule && locale && language) {
         cldrRule = _cldrConv.default[language] || _cldrConv.default[language.split(/-|_/)[0]];
       }
-
       if (!cldrRule) isPlural = false;
       if (ignorePlurals) isPlural = false;
       var form;
       var number = 0;
-
       if (isPlural && key.indexOf('_other') < 0) {
         form = key.substring(pluralIndex + 1);
         var oldSuffix = cldrRule.fromCldr[FORMS.indexOf(form)];
-
         if (!oldSuffix) {
           isPlural = false;
         } else {
           number = parseInt(oldSuffix.substring(1), 10);
         }
-
         if (number === 1) isPlural = false;
         key = key.substring(0, pluralIndex);
       } else if (key.indexOf('_other') > -1) {
@@ -542,12 +511,9 @@ function _default(input) {
         key = key.substring(0, pluralIndex);
         form = '_other';
       }
-
       var ctxKey = key;
-
       if (isPlural) {
         ctxKey = ctxKey.substring(0, pluralIndex);
-
         if (ctxKey.indexOf(ctxSeparator) > -1) {
           context = ctxKey.substring(ctxKey.lastIndexOf(ctxSeparator) + ctxSeparator.length, ctxKey.length);
         }
@@ -556,12 +522,10 @@ function _default(input) {
       } else {
         context = '';
       }
-
       if (context === key) context = '';
       if (context !== '') key = key.replace(ctxSeparator + context, '');
       var appendKey = key + context;
       if (isPlural) appendKey = "".concat(appendKey, "_").concat(number);
-
       if (typeof value === 'string') {
         kv = {
           key: key,
@@ -586,7 +550,6 @@ function _default(input) {
       }
     });
   }
-
   function recurse(appendTo, obj, parentKey) {
     if (compatibilityJSON === 'v4') {
       handleNewFormat(appendTo, obj, parentKey);
@@ -594,11 +557,9 @@ function _default(input) {
       handleOldFormat(appendTo, obj, parentKey);
     }
   }
-
   recurse(flat, input, '');
   Object.keys(flat).forEach(function (m) {
     var kv = flat[m];
-
     if (kv.isPlural) {
       if (!flat[kv.key + kv.context]) {
         flat[kv.key + kv.context] = {
@@ -606,9 +567,7 @@ function _default(input) {
           context: kv.context
         };
       }
-
       var single = flat[kv.key + kv.context];
-
       if (single) {
         single.plurals = [].concat(_toConsumableArray(single.plurals || []), [kv]);
         delete flat[m];
@@ -617,7 +576,6 @@ function _default(input) {
   });
   return flat;
 }
-
 module.exports = exports.default;
 },{"./cldrConv.js":1}],3:[function(require,module,exports){
 "use strict";
@@ -626,40 +584,29 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = i18next2js;
-
 var _arrify = _interopRequireDefault(require("arrify"));
-
 var _flatten = _interopRequireDefault(require("./flatten.js"));
-
 var _options = require("./options.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var getGettextPluralPosition = function getGettextPluralPosition(ext, suffix) {
   if (ext) {
     for (var i = 0; i < ext.numbers.length; i += 1) {
       if (i === suffix) return i;
     }
   }
-
   return -1;
 };
-
 var getPluralArray = function getPluralArray(locale, translation, plurals) {
   var ext = plurals[locale.toLowerCase()] || plurals[locale.split(/_|-/)[0].toLowerCase()] || plurals.dev;
   var pArray = [];
-
   for (var i = 0, len = translation.plurals.length; i < len; i += 1) {
     var plural = translation.plurals[i];
     pArray.splice(getGettextPluralPosition(ext, plural.pluralNumber - 1), 0, plural.value);
   }
-
   pArray.splice(getGettextPluralPosition(ext, translation.pluralNumber - 1), 0, translation.value);
   return pArray;
 };
-
 var parseGettext = function parseGettext(locale, data) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var out = {
@@ -677,33 +624,26 @@ var parseGettext = function parseGettext(locale, data) {
   var ext = plurals[locale.toLowerCase()] || plurals[locale.split(/_|-/)[0].toLowerCase()] || plurals.dev;
   var trans = {};
   out.headers['plural-forms'] = "nplurals=".concat(ext.numbers.length, "; plural=").concat(ext.plurals);
-
   if (!options.noDate) {
     out.headers['pot-creation-date'] = new Date().toISOString();
     out.headers['po-revision-date'] = new Date().toISOString();
     if (options.potCreationDate && typeof options.potCreationDate.toISOString === 'function') out.headers['pot-creation-date'] = options.potCreationDate.toISOString();
     if (options.poRevisionDate && typeof options.poRevisionDate.toISOString === 'function') out.headers['po-revision-date'] = options.poRevisionDate.toISOString();
   }
-
   if (options.language) out.headers.language = options.language;else if (setLocaleAsLanguageHeader) out.headers.language = locale;
   var delkeys = [];
   Object.keys(data).forEach(function (m) {
     var kv = data[m];
-
     if (kv.plurals) {
       var pArray = [];
-
       for (var i = 0, len = kv.plurals.length; i < len; i += 1) {
         var plural = kv.plurals[i];
         pArray.splice(getGettextPluralPosition(ext, plural.pluralNumber - 1), 0, plural.value);
       }
-
       if (ext.numbers.length !== 1) {
         pArray.splice(getGettextPluralPosition(ext, kv.pluralNumber - 1), 0, kv.value);
       }
-
       if (_typeof(trans[kv.context]) !== 'object') trans[kv.context] = {};
-
       if (options.keyasareference) {
         if (_typeof(trans[kv.context][kv.value]) === 'object') {
           trans[kv.context][kv.value].comments.reference.push(kv.key);
@@ -718,20 +658,17 @@ var parseGettext = function parseGettext(locale, data) {
             }
           };
         }
-
         if (kv.key !== kv.value) {
           delkeys.push([kv.context, kv.key]);
         }
       } else {
         var msgid = kv.key;
         var msgid_plural = kv.key;
-
         if (kv.key.indexOf('|#|') > -1) {
           var p = kv.key.split('|#|');
           msgid = p[0];
           msgid_plural = p[1];
         }
-
         trans[kv.context][kv.key] = {
           msgctxt: kv.context,
           msgid: msgid,
@@ -741,7 +678,6 @@ var parseGettext = function parseGettext(locale, data) {
       }
     } else {
       if (_typeof(trans[kv.context]) !== 'object') trans[kv.context] = {};
-
       if (options.keyasareference) {
         if (_typeof(trans[kv.context][kv.value]) === 'object') {
           trans[kv.context][kv.value].comments.reference.push(kv.key);
@@ -755,7 +691,6 @@ var parseGettext = function parseGettext(locale, data) {
             }
           };
         }
-
         if (kv.key !== kv.value) {
           delkeys.push([kv.context, kv.key]);
         }
@@ -783,11 +718,9 @@ var parseGettext = function parseGettext(locale, data) {
   out.translations = trans;
   return out;
 };
-
 function i18next2js(locale, body) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var flat = (0, _flatten.default)(typeof body === 'string' ? JSON.parse(body) : body, options, locale);
-
   if (options.base) {
     var bflat = (0, _flatten.default)(JSON.parse(options.base), options);
     Object.keys(bflat).forEach(function (key) {
@@ -801,10 +734,8 @@ function i18next2js(locale, body) {
     });
     return parseGettext(locale, bflat, options);
   }
-
   return parseGettext(locale, flat, options);
 }
-
 module.exports = exports.default;
 },{"./flatten.js":2,"./options.js":8,"arrify":15}],4:[function(require,module,exports){
 "use strict";
@@ -813,19 +744,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = i18next2po;
-
 var _i18next2js = _interopRequireDefault(require("./i18next2js.js"));
-
 var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function i18next2po(locale, body) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var data = (0, _i18next2js.default)(locale, body, options);
   return (0, _poCompiler.default)(data, options);
 }
-
 module.exports = exports.default;
 },{"./i18next2js.js":3,"./poCompiler.js":12}],5:[function(require,module,exports){
 "use strict";
@@ -870,22 +796,14 @@ Object.defineProperty(exports, "po2js", {
     return _po2js.default;
   }
 });
-
 var _po2js = _interopRequireDefault(require("./po2js.js"));
-
 var _js2po = _interopRequireDefault(require("./js2po.js"));
-
 var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
-
 var _po2i18next = _interopRequireDefault(require("./po2i18next.js"));
-
 var _i18next2js = _interopRequireDefault(require("./i18next2js.js"));
-
 var _i18next2po = _interopRequireDefault(require("./i18next2po.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = {
+var _default = exports.default = {
   po2js: _po2js.default,
   js2po: _js2po.default,
   js2i18next: _js2i18next.default,
@@ -893,7 +811,6 @@ var _default = {
   i18next2js: _i18next2js.default,
   i18next2po: _i18next2po.default
 };
-exports.default = _default;
 },{"./i18next2js.js":3,"./i18next2po.js":4,"./js2i18next.js":6,"./js2po.js":7,"./po2i18next.js":10,"./po2js.js":11}],6:[function(require,module,exports){
 "use strict";
 
@@ -901,39 +818,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-
 var _options = require("./options.js");
-
 var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
-
 var isFuzzy = function isFuzzy(translation) {
   return !!translation.comments && translation.comments.flag === 'fuzzy';
 };
-
 var toArrayIfNeeded = function toArrayIfNeeded(value, _ref) {
   var splitNewLine = _ref.splitNewLine;
   return value.indexOf('\n') > -1 && splitNewLine ? value.split('\n') : value;
 };
-
 var emptyOrObject = function emptyOrObject(key, value, options) {
   if (options.skipUntranslated && !value) {
     return {};
   }
-
   return _defineProperty({}, key, toArrayIfNeeded(value, options));
 };
-
 var getI18nextPluralExtension = function getI18nextPluralExtension(ext, i) {
   if (ext && ext.numbers && ext.numbers.length === 2) return i === 0 ? '' : '_plural';
   return "_".concat(i);
 };
-
 var getGettextValues = function getGettextValues(value, locale, targetKey, options) {
   var values = value.msgstr;
   var plurals = (0, _options.getPlurals)(options);
@@ -941,29 +850,22 @@ var getGettextValues = function getGettextValues(value, locale, targetKey, optio
   if (!isPlural) return emptyOrObject(targetKey, values[0], options);
   var ext = plurals[locale.toLowerCase()] || plurals[locale.split(/_|-/)[0].toLowerCase()] || plurals.dev;
   var gettextValues = {};
-
   for (var i = 0; i < values.length; i += 1) {
     var pluralSuffix = getI18nextPluralExtension(ext, i);
-
     if (options.compatibilityJSON === 'v4') {
       var cldrRule = _cldrConv.default[locale] || _cldrConv.default[locale.split(/-|_/)[0]];
-
       if (cldrRule && cldrRule.toCldr[pluralSuffix] !== undefined && FORMS[cldrRule.toCldr[pluralSuffix]]) {
         pluralSuffix = "_".concat(FORMS[cldrRule.toCldr[pluralSuffix]]);
       }
     }
-
     var pkey = targetKey + pluralSuffix;
     Object.assign(gettextValues, emptyOrObject(pkey, values[i], options));
   }
-
   return gettextValues;
 };
-
 function _default(js) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var data = JSON.parse(JSON.stringify(js.translations));
-
   if (options.keyasareference) {
     var keys = [];
     Object.keys(data).forEach(function (ctx) {
@@ -972,17 +874,13 @@ function _default(js) {
           data[ctx][key].comments.reference.split(/\r?\n|\r/).forEach(function (id) {
             var x = data[ctx][key];
             data[ctx][id] = x;
-
             if (options.skipUntranslated && (x.msgstr.length === 1 && !x.msgstr[0] || isFuzzy(x))) {
               return;
             }
-
             if (x.msgstr[0] === '') x.msgstr[0] = x.msgid;
-
             for (var i = 1; i < x.msgstr.length; i += 1) {
               if (x.msgstr[i] === '') x.msgstr[i] = x.msgid_plural;
             }
-
             x.msgid = id;
             if (id !== key) keys.push([ctx, key]);
           });
@@ -995,7 +893,6 @@ function _default(js) {
       delete data[c][k];
     });
   }
-
   var json = {};
   var separator = options.keyseparator || '##';
   var ctxSeparator = options.ctxSeparator || '_';
@@ -1005,50 +902,40 @@ function _default(js) {
     Object.keys(context).forEach(function (key) {
       var targetKey = key;
       var appendTo = json;
-
       if (key.length === 0) {
         delete context[key];
         return;
       }
-
       if (options.skipUntranslated && isFuzzy(context[key])) {
         delete context[key];
         return;
       }
-
       if (key.indexOf(separator) > -1) {
         var _keys = key.split(separator);
-
         var x = 0;
-
-        while (_keys[x]) {
+        while (_keys[x] !== undefined && _keys[x] !== null) {
           if (x < _keys.length - 1) {
             appendTo[_keys[x]] = appendTo[_keys[x]] || {};
             appendTo = appendTo[_keys[x]];
           } else {
             targetKey = _keys[x];
           }
-
           x += 1;
         }
       }
-
       if (m !== '' && !options.ignoreCtx) targetKey = "".concat(targetKey).concat(ctxSeparator).concat(m);
-
       if (options.persistMsgIdPlural) {
         var _context$key = context[key];
         var msgid = _context$key.msgid;
         var msgid_plural = _context$key.msgid_plural;
         if (msgid_plural && msgid !== msgid_plural) targetKey = "".concat(msgid, "|#|").concat(msgid_plural);
       }
-
       var newValues = getGettextValues(context[key], locale, targetKey, options);
       Object.assign(appendTo, newValues);
     });
   });
   return json;
 }
-
 module.exports = exports.default;
 },{"./cldrConv.js":1,"./options.js":8}],7:[function(require,module,exports){
 "use strict";
@@ -1057,15 +944,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = js2po;
-
 var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function js2po(table, options) {
   return (0, _poCompiler.default)(table, options);
 }
-
 module.exports = exports.default;
 },{"./poCompiler.js":12}],8:[function(require,module,exports){
 "use strict";
@@ -1074,22 +957,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getSetLocaleAsLanguageHeader = exports.getPlurals = void 0;
-
 var _plurals = _interopRequireDefault(require("./plurals.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var getPlurals = function getPlurals(options) {
+var getPlurals = exports.getPlurals = function getPlurals(options) {
   return options.plurals || _plurals.default;
 };
-
-exports.getPlurals = getPlurals;
-
-var getSetLocaleAsLanguageHeader = function getSetLocaleAsLanguageHeader(options) {
+var getSetLocaleAsLanguageHeader = exports.getSetLocaleAsLanguageHeader = function getSetLocaleAsLanguageHeader(options) {
   return typeof options.setLocaleAsLanguageHeader === 'boolean' ? options.setLocaleAsLanguageHeader : true;
 };
-
-exports.getSetLocaleAsLanguageHeader = getSetLocaleAsLanguageHeader;
 },{"./plurals.js":9}],9:[function(require,module,exports){
 "use strict";
 
@@ -1223,8 +1098,7 @@ sets.forEach(function (set) {
     };
   });
 });
-var _default = rules;
-exports.default = _default;
+var _default = exports.default = rules;
 module.exports = exports.default;
 },{}],10:[function(require,module,exports){
 "use strict";
@@ -1233,18 +1107,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = po2i18next;
-
 var _po2js = _interopRequireDefault(require("./po2js.js"));
-
 var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function po2i18next(fileContents, options) {
   var js = (0, _po2js.default)(fileContents, options);
   return (0, _js2i18next.default)(js, options);
 }
-
 module.exports = exports.default;
 },{"./js2i18next.js":6,"./po2js.js":11}],11:[function(require,module,exports){
 "use strict";
@@ -1253,15 +1122,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = po2js;
-
 var _poParser = _interopRequireDefault(require("./poParser.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function po2js(fileContents, options) {
   return (0, _poParser.default)(fileContents, options);
 }
-
 module.exports = exports.default;
 },{"./poParser.js":13}],12:[function(require,module,exports){
 "use strict";
@@ -1270,30 +1135,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-
 var _contentType = _interopRequireDefault(require("content-type"));
-
 var _encoding = _interopRequireDefault(require("encoding"));
-
 var _shared = require("./shared.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var handleCharset = function handleCharset(table) {
   var ct = _contentType.default.parse(table.headers['Content-Type'] || 'text/plain');
-
   var charset = (0, _shared.formatCharset)(table.charset || ct.parameters.charset || 'utf-8');
-
   if (ct.parameters.charset) {
     ct.parameters.charset = (0, _shared.formatCharset)(ct.parameters.charset);
   }
-
   table.charset = charset;
   table.headers['Content-Type'] = _contentType.default.format(ct);
 };
-
 var drawComments = function drawComments(comments) {
   var lines = [];
   var types = [{
@@ -1320,7 +1175,6 @@ var drawComments = function drawComments(comments) {
   });
   return lines.join('\n');
 };
-
 var addPOString = function addPOString() {
   var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
@@ -1328,18 +1182,14 @@ var addPOString = function addPOString() {
   key = key.toString();
   value = value.toString().replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\t/g, '\\t').replace(/\r/g, '\\r').replace(/\n/g, '\\n');
   var lines = [value];
-
   if (options.foldLength > 0) {
     lines = (0, _shared.foldLine)(value, options.foldLength);
   }
-
   if (lines.length < 2) {
     return "".concat(key, " \"").concat(lines.shift() || '', "\"");
   }
-
   return "".concat(key, " \"\"\n\"").concat(lines.join('"\n"'), "\"");
 };
-
 var drawBlock = function drawBlock(block) {
   var override = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var options = arguments.length > 2 ? arguments[2] : undefined;
@@ -1349,33 +1199,26 @@ var drawBlock = function drawBlock(block) {
   var msgidPlural = override.msgid_plural || block.msgid_plural;
   var msgstr = [].concat(override.msgstr || block.msgstr);
   var comments = override.comments || block.comments;
-
   if (comments && (comments = drawComments(comments))) {
     response.push(comments);
   }
-
   if (msgctxt) {
     response.push(addPOString('msgctxt', msgctxt, options));
   }
-
   response.push(addPOString('msgid', msgid || '', options));
-
   if (msgidPlural) {
     response.push(addPOString('msgid_plural', msgidPlural, options));
     msgstr.forEach(function (msgstr, i) {
       response.push(addPOString("msgstr[".concat(i, "]"), msgstr || '', options));
     });
-
     if (msgstr.length === 0) {
       response.push(addPOString('msgstr[0]', '', options));
     }
   } else {
     response.push(addPOString('msgstr', msgstr[0] || '', options));
   }
-
   return response.join('\n');
 };
-
 var compile = function compile(table, options) {
   var headerBlock = table.translations[''] && table.translations[''][''] || {};
   var response = [];
@@ -1387,7 +1230,6 @@ var compile = function compile(table, options) {
       response.push(table.translations[msgctxt][msgid]);
     });
   });
-
   if (options.sort !== false) {
     if (typeof options.sort === 'function') {
       response = response.sort(options.sort);
@@ -1395,37 +1237,31 @@ var compile = function compile(table, options) {
       response = response.sort(_shared.compareMsgid);
     }
   }
-
   response = response.map(function (r) {
     return drawBlock(r, {}, options);
   });
   response.unshift(drawBlock(headerBlock, {
     msgstr: (0, _shared.generateHeader)(table.headers)
   }, options));
-
   if (table.charset === 'utf-8' || table.charset === 'ascii') {
     return response.join('\n\n');
   }
-
   return _encoding.default.convert(response.join('\n\n'), table.charset).toString();
 };
-
 function _default() {
   var table = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   table.translations = table.translations || {};
   options.project = options.project || 'gettext-converter';
   var _table$headers = table.headers,
-      headers = _table$headers === void 0 ? {} : _table$headers;
+    headers = _table$headers === void 0 ? {} : _table$headers;
   headers = Object.keys(headers).reduce(function (result, key) {
     var lowerKey = key.toLowerCase();
-
     if (_shared.HEADERS.has(lowerKey)) {
       result[_shared.HEADERS.get(lowerKey)] = headers[key];
     } else {
       result[key] = headers[key];
     }
-
     return result;
   }, {});
   if (!headers[_shared.HEADERS.get('project-id-version')]) headers[_shared.HEADERS.get('project-id-version')] = options.project;
@@ -1435,7 +1271,6 @@ function _default() {
   handleCharset(table);
   return compile(table, options);
 }
-
 module.exports = exports.default;
 },{"./shared.js":14,"content-type":19,"encoding":20}],13:[function(require,module,exports){
 "use strict";
@@ -1444,13 +1279,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
-
 var _encoding = _interopRequireDefault(require("encoding"));
-
 var _shared = require("./shared.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var states = {
   none: 0x01,
   comments: 0x02,
@@ -1469,27 +1300,22 @@ var symbols = {
   key: /[\w\-[\]]/,
   keyNames: /^(?:msgctxt|msgid(?:_plural)?|msgstr(?:\[\d+])?)$/
 };
-
 var toString = function toString(buf, charset) {
   return _encoding.default.convert(buf, 'utf-8', charset).toString('utf-8');
 };
-
 var parseHeader = function parseHeader() {
   var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   return str.split('\n').reduce(function (headers, line) {
     var parts = line.split(':');
     var key = (parts.shift() || '').trim();
-
     if (key) {
       var value = parts.join(':').trim();
       key = _shared.HEADERS.get(key.toLowerCase()) || key;
       headers[key] = value;
     }
-
     return headers;
   }, {});
 };
-
 var handleCharset = function handleCharset() {
   var buf = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var defaultCharset = arguments.length > 1 ? arguments[1] : undefined;
@@ -1498,29 +1324,24 @@ var handleCharset = function handleCharset() {
   var headers = '';
   var match;
   var charset = defaultCharset;
-
   if ((pos = str.search(/^\s*msgid/im)) >= 0) {
     pos = pos + str.substr(pos + 5).search(/^\s*(msgid|msgctxt)/im);
     headers = str.substr(0, pos >= 0 ? pos + 5 : str.length);
   }
-
   if (match = headers.match(/[; ]charset\s*=\s*([\w-]+)(?:[\s;]|\\n)*"\s*$/mi)) {
     charset = (0, _shared.formatCharset)(match[1], defaultCharset);
   }
-
   if (charset === 'utf-8') {
     return {
       fileContents: str,
       charset: charset
     };
   }
-
   return {
     fileContents: toString(buf),
     charset: charset
   };
 };
-
 var lexer = function lexer(chunk) {
   var lex = [];
   var node = {};
@@ -1528,11 +1349,9 @@ var lexer = function lexer(chunk) {
   var lineNumber = 1;
   var escaped = false;
   var chr;
-
   for (var i = 0, len = chunk.length; i < len; i++) {
     chr = chunk.charAt(i);
     if (chr === '\n') lineNumber += 1;
-
     switch (state) {
       case states.none:
         if (chr.match(symbols.quotes)) {
@@ -1558,37 +1377,29 @@ var lexer = function lexer(chunk) {
           lex.push(node);
           state = states.key;
         }
-
         break;
-
       case states.comments:
         if (chr === '\n') {
           state = states.none;
         } else if (chr !== '\r') {
           node.value += chr;
         }
-
         break;
-
       case states.string:
         if (escaped) {
           switch (chr) {
             case 't':
               node.value += '\t';
               break;
-
             case 'n':
               node.value += '\n';
               break;
-
             case 'r':
               node.value += '\r';
               break;
-
             default:
               node.value += chr;
           }
-
           escaped = false;
         } else {
           if (chr === node.quote) {
@@ -1599,12 +1410,9 @@ var lexer = function lexer(chunk) {
           } else {
             node.value += chr;
           }
-
           escaped = false;
         }
-
         break;
-
       case states.key:
         if (!chr.match(symbols.key)) {
           if (!node.value.match(symbols.keyNames)) {
@@ -1612,24 +1420,19 @@ var lexer = function lexer(chunk) {
             err.lineNumber = lineNumber;
             throw err;
           }
-
           state = states.none;
           i--;
         } else {
           node.value += chr;
         }
-
         break;
     }
   }
-
   return lex;
 };
-
 var joinStringValues = function joinStringValues(tokens) {
   var response = [];
   var lastNode;
-
   for (var i = 0, len = tokens.length; i < len; i++) {
     if (lastNode && tokens[i].type === types.string && lastNode.type === types.string) {
       lastNode.value += tokens[i].value;
@@ -1640,15 +1443,12 @@ var joinStringValues = function joinStringValues(tokens) {
       lastNode = tokens[i];
     }
   }
-
   return response;
 };
-
 var parseComments = function parseComments(tokens) {
   tokens.forEach(function (node) {
     var comment;
     var lines;
-
     if (node && node.type === types.comments) {
       comment = {
         translator: [],
@@ -1663,19 +1463,15 @@ var parseComments = function parseComments(tokens) {
           case ':':
             comment.reference.push(line.substr(1).trim());
             break;
-
           case '.':
             comment.extracted.push(line.substr(1).replace(/^\s+/, ''));
             break;
-
           case ',':
             comment.flag.push(line.substr(1).replace(/^\s+/, ''));
             break;
-
           case '|':
             comment.previous.push(line.substr(1).replace(/^\s+/, ''));
             break;
-
           default:
             comment.translator.push(line.replace(/^\s+/, ''));
         }
@@ -1689,37 +1485,30 @@ var parseComments = function parseComments(tokens) {
     }
   });
 };
-
 var handleKeys = function handleKeys(tokens) {
   var response = [];
   var lastNode;
-
   for (var i = 0, len = tokens.length; i < len; i++) {
     if (tokens[i].type === types.key) {
       lastNode = {
         key: tokens[i].value
       };
-
       if (i && tokens[i - 1].type === types.comments) {
         lastNode.comments = tokens[i - 1].value;
       }
-
       lastNode.value = '';
       response.push(lastNode);
     } else if (tokens[i].type === types.string && lastNode) {
       lastNode.value += tokens[i].value;
     }
   }
-
   return response;
 };
-
 var handleValues = function handleValues(tokens) {
   var response = [];
   var lastNode;
   var curContext;
   var curComments;
-
   for (var i = 0, len = tokens.length; i < len; i++) {
     if (tokens[i].key.toLowerCase() === 'msgctxt') {
       curContext = tokens[i].value;
@@ -1746,10 +1535,8 @@ var handleValues = function handleValues(tokens) {
       curComments = false;
     }
   }
-
   return response;
 };
-
 var normalize = function normalize(tokens, charset) {
   var table = {
     charset: charset,
@@ -1757,21 +1544,16 @@ var normalize = function normalize(tokens, charset) {
     translations: {}
   };
   var msgctxt;
-
   for (var i = 0, len = tokens.length; i < len; i++) {
     msgctxt = tokens[i].msgctxt || '';
     if (!table.translations[msgctxt]) table.translations[msgctxt] = {};
-
     if (!table.headers && !msgctxt && !tokens[i].msgid) {
       table.headers = parseHeader(tokens[i].msgstr[0]);
     }
-
     table.translations[msgctxt][tokens[i].msgid] = tokens[i];
   }
-
   return table;
 };
-
 var finalize = function finalize(tokens, charset) {
   var data = joinStringValues(tokens);
   parseComments(data);
@@ -1779,18 +1561,14 @@ var finalize = function finalize(tokens, charset) {
   data = handleValues(data);
   return normalize(data, charset);
 };
-
 function _default(fileContents) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
   if (typeof options === 'string') {
     options = {
       charset: options
     };
   }
-
   options.charset = options.charset || 'iso-8859-1';
-
   if (typeof fileContents === 'string') {
     options.charset = 'utf-8';
   } else {
@@ -1798,11 +1576,9 @@ function _default(fileContents) {
     options.charset = ret.charset;
     fileContents = ret.fileContents;
   }
-
   var lex = lexer(fileContents);
   return finalize(lex, options.charset);
 }
-
 module.exports = exports.default;
 },{"./shared.js":14,"encoding":20}],14:[function(require,module,exports){
 "use strict";
@@ -1815,17 +1591,12 @@ exports.compareMsgid = compareMsgid;
 exports.foldLine = foldLine;
 exports.formatCharset = void 0;
 exports.generateHeader = generateHeader;
-var HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
-exports.HEADERS = HEADERS;
-
-var formatCharset = function formatCharset() {
+var HEADERS = exports.HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
+var formatCharset = exports.formatCharset = function formatCharset() {
   var charset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'iso-8859-1';
   var defaultCharset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'iso-8859-1';
   return charset.toString().toLowerCase().replace(/^utf[-_]?(\d+)$/, 'utf-$1').replace(/^win(?:dows)?[-_]?(\d+)$/, 'windows-$1').replace(/^latin[-_]?(\d+)$/, 'iso-8859-$1').replace(/^(us[-_]?)?ascii$/, 'ascii').replace(/^charset$/, defaultCharset).trim();
 };
-
-exports.formatCharset = formatCharset;
-
 function compareMsgid(_ref, _ref2) {
   var left = _ref.msgid;
   var right = _ref2.msgid;
@@ -1833,7 +1604,6 @@ function compareMsgid(_ref, _ref2) {
   if (left > right) return 1;
   return 0;
 }
-
 function foldLine(str) {
   var maxLen = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 76;
   var lines = [];
@@ -1841,14 +1611,11 @@ function foldLine(str) {
   var curLine = '';
   var pos = 0;
   var match;
-
   while (pos < len) {
     curLine = str.substr(pos, maxLen);
-
     while (curLine.substr(-1) === '\\' && pos + curLine.length < len) {
       curLine += str.charAt(pos + curLine.length);
     }
-
     if (match = /.*?\\n/.exec(curLine)) {
       curLine = match[0];
     } else if (pos + curLine.length < len) {
@@ -1858,14 +1625,11 @@ function foldLine(str) {
         curLine = match[0];
       }
     }
-
     lines.push(curLine);
     pos += curLine.length;
   }
-
   return lines;
 }
-
 function generateHeader() {
   var header = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var keys = Object.keys(header).filter(function (key) {
@@ -3859,8 +3623,8 @@ function numberIsNaN (obj) {
  * obs-text      = %x80-FF
  * quoted-pair   = "\" ( HTAB / SP / VCHAR / obs-text )
  */
-var PARAM_REGEXP = /; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) */g
-var TEXT_REGEXP = /^[\u000b\u0020-\u007e\u0080-\u00ff]+$/
+var PARAM_REGEXP = /; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) */g // eslint-disable-line no-control-regex
+var TEXT_REGEXP = /^[\u000b\u0020-\u007e\u0080-\u00ff]+$/ // eslint-disable-line no-control-regex
 var TOKEN_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/
 
 /**
@@ -3869,7 +3633,7 @@ var TOKEN_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/
  * quoted-pair = "\" ( HTAB / SP / VCHAR / obs-text )
  * obs-text    = %x80-FF
  */
-var QESC_REGEXP = /\\([\u000b\u0020-\u00ff])/g
+var QESC_REGEXP = /\\([\u000b\u0020-\u00ff])/g // eslint-disable-line no-control-regex
 
 /**
  * RegExp to match chars that must be quoted-pair in RFC 7230 sec 3.2.6
@@ -3958,7 +3722,7 @@ function parse (string) {
 
   var index = header.indexOf(';')
   var type = index !== -1
-    ? header.substr(0, index).trim()
+    ? header.slice(0, index).trim()
     : header.trim()
 
   if (!TYPE_REGEXP.test(type)) {
@@ -3984,11 +3748,14 @@ function parse (string) {
       key = match[1].toLowerCase()
       value = match[2]
 
-      if (value[0] === '"') {
-        // remove quotes and escapes
-        value = value
-          .substr(1, value.length - 2)
-          .replace(QESC_REGEXP, '$1')
+      if (value.charCodeAt(0) === 0x22 /* " */) {
+        // remove quotes
+        value = value.slice(1, -1)
+
+        // remove escapes
+        if (value.indexOf('\\') !== -1) {
+          value = value.replace(QESC_REGEXP, '$1')
+        }
       }
 
       obj.parameters[key] = value

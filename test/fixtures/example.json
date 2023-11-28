@@ -77,6 +77,10 @@
               "msgstr": [
                   "\"\\'\t"
               ]
+          },
+          "Nested empty key##": {
+              "msgid": "Nested empty key##",
+              "msgstr": ["test"]
           }
       },
       "c1": {

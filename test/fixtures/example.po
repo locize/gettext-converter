@@ -54,6 +54,9 @@ msgstr "test"
 msgid "\"\\'\t"
 msgstr "\"\\'\t"
 
+msgid "Nested empty key##"
+msgstr "test"
+
 # Normal string in a context
 msgctxt "c1"
 msgid "co1"
