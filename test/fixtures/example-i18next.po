@@ -26,6 +26,9 @@ msgstr "test"
 msgid "\"\\'\t"
 msgstr "\"\\'\t"
 
+msgid "Nested empty key##"
+msgstr "test"
+
 msgctxt "c1"
 msgid "co1"
 msgstr "ct1"

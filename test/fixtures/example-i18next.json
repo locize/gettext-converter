@@ -5,6 +5,9 @@
   "o3-õäöü": "t3-žš",
   "test": "test",
   "\"\\'\t": "\"\\'\t",
+  "Nested empty key": {
+    "": "test"
+  },
   "co1_c1": "ct1",
   "co2-1_c2": "ct2-1",
   "co2-1_c2_plural": "ct2-2",
