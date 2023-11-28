@@ -1,3 +1,7 @@
+### 1.2.4
+
+- fix: key separator at the end of string not handled properly [9](https://github.com/locize/gettext-converter/issues/9)
+
 ### 1.2.3
 
 - fix keyasareference option causes "corrupted" po file [7](https://github.com/locize/gettext-converter/pull/7)
