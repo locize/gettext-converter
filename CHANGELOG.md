@@ -1,3 +1,7 @@
+### 1.3.0
+
+- feat: introduce `fallbackToMsgId` option [12](https://github.com/locize/gettext-converter/issues/12)
+
 ### 1.2.4
 
 - fix: key separator at the end of string not handled properly [9](https://github.com/locize/gettext-converter/issues/9)

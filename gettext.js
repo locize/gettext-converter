@@ -823,8 +823,8 @@ var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
 var isFuzzy = function isFuzzy(translation) {
   return !!translation.comments && translation.comments.flag === 'fuzzy';
@@ -837,6 +837,9 @@ var emptyOrObject = function emptyOrObject(key, value, options) {
   if (options.skipUntranslated && !value) {
     return {};
   }
+  if (options.fallbackToMsgId && !value) {
+    return _defineProperty({}, key, toArrayIfNeeded(key, options));
+  }
   return _defineProperty({}, key, toArrayIfNeeded(value, options));
 };
 var getI18nextPluralExtension = function getI18nextPluralExtension(ext, i) {
@@ -847,7 +850,7 @@ var getGettextValues = function getGettextValues(value, locale, targetKey, optio
   var values = value.msgstr;
   var plurals = (0, _options.getPlurals)(options);
   var isPlural = !!value.msgid_plural;
-  if (!isPlural) return emptyOrObject(targetKey, values[0], options);
+  if (!isPlural) return emptyOrObject(targetKey, values === undefined ? '' : values[0], options);
   var ext = plurals[locale.toLowerCase()] || plurals[locale.split(/_|-/)[0].toLowerCase()] || plurals.dev;
   var gettextValues = {};
   for (var i = 0; i < values.length; i += 1) {

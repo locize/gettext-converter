@@ -15,5 +15,9 @@ module.exports = {
   example_persistMsgIdPlural: {
     jsi18next: require('./example_persistMsgIdPlural.json'),
     poi18next: fs.readFileSync(path.join(__dirname, 'example_persistMsgIdPlural.po')).toString().replace(/\n$/, '')
+  },
+  example_fallbackMsgId: {
+    jsi18next: require('./example-i18next_fallbackMsgId.json'),
+    poi18next: fs.readFileSync(path.join(__dirname, 'example-i18next_fallbackMsgId.po')).toString().replace(/\n$/, '')
   }
 }

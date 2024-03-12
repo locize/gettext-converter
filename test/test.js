@@ -62,6 +62,16 @@ describe('i18nextOptions', () => {
   })
 })
 
+describe('i18nextOptions (fallbackToMsgId)', () => {
+  test('po2i18next', (fn) => () => {
+    const res = fn(fixtures.example_fallbackMsgId.poi18next, {
+      compatibilityJSON: 'v4',
+      fallbackToMsgId: true
+    })
+    expect(res).to.eql(fixtures.example_fallbackMsgId.jsi18next)
+  })
+})
+
 describe('i18next v4', () => {
   test('po2i18next', (fn) => () => {
     const res2 = fn(fixtures.example.poi18nextV4, {
