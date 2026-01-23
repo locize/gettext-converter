@@ -1,0 +1,4 @@
+msgid "{count} issue(s)"
+msgid_plural ""
+msgstr[0] "{count} issue"
+msgstr[1] "{count} issues"

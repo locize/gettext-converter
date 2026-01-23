@@ -1,6 +1,5 @@
 const expect = require('expect.js')
 const fixtures = require('./fixtures')
-
 function test (what, t) {
   describe(what, () => {
     it('index', t(require('../')[what]))
@@ -22,7 +21,6 @@ test('js2i18next', (fn) => () => {
   const res = fn(fixtures.example.js)
   expect(res).to.eql(fixtures.example.jsi18next)
 })
-
 test('po2i18next', (fn) => () => {
   const res = fn(fixtures.example.po)
   expect(res).to.eql(fixtures.example.jsi18next)
@@ -99,5 +97,12 @@ describe('i18next v4', () => {
       })
       expect(res).to.eql(fixtures.example.poi18nextV4_ref)
     })
+  })
+})
+
+describe('Plural handling with empty msgid_plural', () => {
+  test('po2i18next', (fn) => () => {
+    const res = fn(fixtures.example_emptyMsgidPlural.po)
+    expect(res).to.eql(fixtures.example_emptyMsgidPlural.jsi18next)
   })
 })

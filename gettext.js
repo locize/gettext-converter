@@ -387,13 +387,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
 var regexIndexOf = function regexIndexOf(value, regex, startpos) {
   var indexOf = value.substring(startpos || 0).search(regex);
@@ -587,7 +587,7 @@ exports.default = i18next2js;
 var _arrify = _interopRequireDefault(require("arrify"));
 var _flatten = _interopRequireDefault(require("./flatten.js"));
 var _options = require("./options.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var getGettextPluralPosition = function getGettextPluralPosition(ext, suffix) {
   if (ext) {
@@ -746,7 +746,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = i18next2po;
 var _i18next2js = _interopRequireDefault(require("./i18next2js.js"));
 var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function i18next2po(locale, body) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var data = (0, _i18next2js.default)(locale, body, options);
@@ -802,7 +802,7 @@ var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
 var _po2i18next = _interopRequireDefault(require("./po2i18next.js"));
 var _i18next2js = _interopRequireDefault(require("./i18next2js.js"));
 var _i18next2po = _interopRequireDefault(require("./i18next2po.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var _default = exports.default = {
   po2js: _po2js.default,
   js2po: _js2po.default,
@@ -820,10 +820,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 var _options = require("./options.js");
 var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
 var isFuzzy = function isFuzzy(translation) {
@@ -849,7 +849,7 @@ var getI18nextPluralExtension = function getI18nextPluralExtension(ext, i) {
 var getGettextValues = function getGettextValues(value, locale, targetKey, options) {
   var values = value.msgstr;
   var plurals = (0, _options.getPlurals)(options);
-  var isPlural = !!value.msgid_plural;
+  var isPlural = !!value.msgid_plural || value.msgid_plural === '';
   if (!isPlural) return emptyOrObject(targetKey, values === undefined ? '' : values[0], options);
   var ext = plurals[locale.toLowerCase()] || plurals[locale.split(/_|-/)[0].toLowerCase()] || plurals.dev;
   var gettextValues = {};
@@ -948,7 +948,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = js2po;
 var _poCompiler = _interopRequireDefault(require("./poCompiler.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function js2po(table, options) {
   return (0, _poCompiler.default)(table, options);
 }
@@ -961,7 +961,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getSetLocaleAsLanguageHeader = exports.getPlurals = void 0;
 var _plurals = _interopRequireDefault(require("./plurals.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var getPlurals = exports.getPlurals = function getPlurals(options) {
   return options.plurals || _plurals.default;
 };
@@ -1112,7 +1112,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = po2i18next;
 var _po2js = _interopRequireDefault(require("./po2js.js"));
 var _js2i18next = _interopRequireDefault(require("./js2i18next.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function po2i18next(fileContents, options) {
   var js = (0, _po2js.default)(fileContents, options);
   return (0, _js2i18next.default)(js, options);
@@ -1126,7 +1126,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = po2js;
 var _poParser = _interopRequireDefault(require("./poParser.js"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function po2js(fileContents, options) {
   return (0, _poParser.default)(fileContents, options);
 }
@@ -1141,7 +1141,7 @@ exports.default = _default;
 var _contentType = _interopRequireDefault(require("content-type"));
 var _encoding = _interopRequireDefault(require("encoding"));
 var _shared = require("./shared.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var handleCharset = function handleCharset(table) {
   var ct = _contentType.default.parse(table.headers['Content-Type'] || 'text/plain');
@@ -1284,7 +1284,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 var _encoding = _interopRequireDefault(require("encoding"));
 var _shared = require("./shared.js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var states = {
   none: 0x01,
   comments: 0x02,

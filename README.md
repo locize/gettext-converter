@@ -1,4 +1,4 @@
-[![travis](https://img.shields.io/travis/locize/gettext-converter.svg)](https://travis-ci.org/locize/gettext-converter) [![npm](https://img.shields.io/npm/v/gettext-converter.svg)](https://npmjs.org/package/gettext-converter)
+[![npm](https://img.shields.io/npm/v/gettext-converter.svg)](https://npmjs.org/package/gettext-converter)
 
 ## Download
 

@@ -78,11 +78,11 @@
     "encoding": "0.1.13"
   },
   "devDependencies": {
-    "@babel/cli": "7.23.9",
-    "@babel/core": "7.24.0",
-    "@babel/preset-env": "7.24.0",
+    "@babel/cli": "7.28.6",
+    "@babel/core": "7.28.6",
+    "@babel/preset-env": "7.28.6",
     "babel-plugin-add-module-exports": "1.0.4",
-    "browserify": "17.0.0",
+    "browserify": "17.0.1",
     "eslint": "8.57.0",
     "eslint-config-standard": "17.1.0",
     "eslint-plugin-import": "2.29.1",
@@ -91,8 +91,8 @@
     "eslint-plugin-require-path-exists": "1.1.9",
     "eslint-plugin-standard": "5.0.0",
     "expect.js": "0.3.1",
-    "mocha": "10.3.0",
-    "uglify-js": "3.17.4"
+    "mocha": "11.7.5",
+    "uglify-js": "3.19.3"
   },
   "scripts": {
     "lint": "eslint .",

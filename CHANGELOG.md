@@ -1,3 +1,7 @@
+### 1.3.1
+
+- fix: handle empty `msgid_plural` as valid plural in PO files, ensuring correct conversion to i18next plural format ([#13](https://github.com/locize/gettext-converter/issues/13))
+
 ### 1.3.0
 
 - feat: introduce `fallbackToMsgId` option [12](https://github.com/locize/gettext-converter/issues/12)
