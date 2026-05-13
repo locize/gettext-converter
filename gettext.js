@@ -544,15 +544,23 @@ function _default(input) {
         };
         appendTo[appendKey] = kv;
       } else if (Array.isArray(value)) {
-        kv = {
-          key: key,
-          value: value.join('\n'),
-          isArray: true,
-          isPlural: isPlural,
-          pluralNumber: isPlural ? number : 0,
-          context: context
-        };
-        appendTo[appendKey] = kv;
+        if (value.every(function (v) {
+          return typeof v === 'string';
+        })) {
+          kv = {
+            key: key,
+            value: value.join('\n'),
+            isArray: true,
+            isPlural: isPlural,
+            pluralNumber: isPlural ? number : 0,
+            context: context
+          };
+          appendTo[appendKey] = kv;
+        } else {
+          value.forEach(function (v, i) {
+            recurse(appendTo, v, "".concat(key).concat(keyseparator).concat(i));
+          });
+        }
       } else {
         recurse(appendTo, value, key);
       }

@@ -106,3 +106,24 @@ describe('Plural handling with empty msgid_plural', () => {
     expect(res).to.eql(fixtures.example_emptyMsgidPlural.jsi18next)
   })
 })
+
+describe('nested array of objects', () => {
+  test('i18next2po', (fn) => () => {
+    const res = fn('en-US', fixtures.example_nestedArray.jsi18next, {
+      potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
+      poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
+    })
+    expect(res).to.eql(fixtures.example_nestedArray.poi18next)
+  })
+
+  describe('i18next v4', () => {
+    test('i18next2po', (fn) => () => {
+      const res = fn('en-US', fixtures.example_nestedArray.jsi18next, {
+        compatibilityJSON: 'v4',
+        potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
+        poRevisionDate: new Date('2020-04-17T10:46:16.313Z')
+      })
+      expect(res).to.eql(fixtures.example_nestedArray.poi18next)
+    })
+  })
+})
