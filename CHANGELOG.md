@@ -1,3 +1,7 @@
+### 1.3.2
+
+- fix: nested array of objects ([#14](https://github.com/locize/gettext-converter/pull/14))
+
 ### 1.3.1
 
 - fix: handle empty `msgid_plural` as valid plural in PO files, ensuring correct conversion to i18next plural format ([#13](https://github.com/locize/gettext-converter/issues/13))
