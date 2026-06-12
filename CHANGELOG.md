@@ -1,3 +1,7 @@
+### 1.3.3
+
+- security: prevent prototype pollution in `js2i18next()` via unsafe translation keys (`__proto__`, `constructor`, `prototype`) ([#15](https://github.com/locize/gettext-converter/issues/15), reported by [@Dremig](https://github.com/Dremig))
+
 ### 1.3.2
 
 - fix: nested array of objects ([#14](https://github.com/locize/gettext-converter/pull/14))

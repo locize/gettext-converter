@@ -835,6 +835,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 var _options = require("./options.js");
+var _shared = require("./shared.js");
 var _cldrConv = _interopRequireDefault(require("./cldrConv.js"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -844,6 +845,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 var FORMS = ['zero', 'one', 'two', 'few', 'many', 'other'];
 var isFuzzy = function isFuzzy(translation) {
   return !!translation.comments && translation.comments.flag === 'fuzzy';
+};
+var isUnsafeKey = function isUnsafeKey(key) {
+  return _shared.UNSAFE_KEYS.indexOf(key) > -1;
 };
 var toArrayIfNeeded = function toArrayIfNeeded(value, _ref) {
   var splitNewLine = _ref.splitNewLine;
@@ -931,6 +935,10 @@ function _default(js) {
       }
       if (key.indexOf(separator) > -1) {
         var _keys = key.split(separator);
+        if (_keys.some(isUnsafeKey)) {
+          delete context[key];
+          return;
+        }
         var x = 0;
         while (_keys[x] !== undefined && _keys[x] !== null) {
           if (x < _keys.length - 1) {
@@ -941,6 +949,9 @@ function _default(js) {
           }
           x += 1;
         }
+      } else if (isUnsafeKey(key)) {
+        delete context[key];
+        return;
       }
       if (m !== '' && !options.ignoreCtx) targetKey = "".concat(targetKey).concat(ctxSeparator).concat(m);
       if (options.persistMsgIdPlural) {
@@ -956,7 +967,7 @@ function _default(js) {
   return json;
 }
 module.exports = exports.default;
-},{"./cldrConv.js":1,"./options.js":8}],7:[function(require,module,exports){
+},{"./cldrConv.js":1,"./options.js":8,"./shared.js":14}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1605,11 +1616,12 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HEADERS = void 0;
+exports.UNSAFE_KEYS = exports.HEADERS = void 0;
 exports.compareMsgid = compareMsgid;
 exports.foldLine = foldLine;
 exports.formatCharset = void 0;
 exports.generateHeader = generateHeader;
+var UNSAFE_KEYS = exports.UNSAFE_KEYS = ['__proto__', 'constructor', 'prototype'];
 var HEADERS = exports.HEADERS = new Map([['project-id-version', 'Project-Id-Version'], ['report-msgid-bugs-to', 'Report-Msgid-Bugs-To'], ['pot-creation-date', 'POT-Creation-Date'], ['po-revision-date', 'PO-Revision-Date'], ['last-translator', 'Last-Translator'], ['language-team', 'Language-Team'], ['language', 'Language'], ['content-type', 'Content-Type'], ['content-transfer-encoding', 'Content-Transfer-Encoding'], ['plural-forms', 'Plural-Forms'], ['mime-version', 'MIME-Version']]);
 var formatCharset = exports.formatCharset = function formatCharset() {
   var charset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'iso-8859-1';

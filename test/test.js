@@ -28,6 +28,24 @@ test('po2i18next', (fn) => () => {
   expect(res2).to.eql(fixtures.example.jsi18next)
 })
 
+describe('prototype pollution', () => {
+  test('js2i18next', (fn) => () => {
+    const unsafeIds = ['__proto__##gcPolluted', '__proto__', 'constructor##prototype##gcPolluted', 'a##constructor##gcPolluted']
+    unsafeIds.forEach((id) => {
+      delete Object.prototype.gcPolluted
+      const res = fn({
+        charset: 'utf-8',
+        headers: { Language: 'en' },
+        translations: { '': { [id]: { msgid: id, msgstr: ['polluted'] } } }
+      })
+      expect({}.gcPolluted).to.be(undefined)
+      expect(Object.prototype.gcPolluted).to.be(undefined)
+      expect(res.gcPolluted).to.be(undefined)
+      delete Object.prototype.gcPolluted
+    })
+  })
+})
+
 test('i18next2js', (fn) => () => {
   const res = fn('en-US', fixtures.example.jsi18next, {
     potCreationDate: new Date('2020-04-17T10:46:16.313Z'),
