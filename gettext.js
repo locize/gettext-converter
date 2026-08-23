@@ -1567,6 +1567,17 @@ var handleValues = function handleValues(tokens) {
   }
   return response;
 };
+var hasOwn = function hasOwn(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+};
+var safeSet = function safeSet(obj, key, value) {
+  return Object.defineProperty(obj, key, {
+    value: value,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  });
+};
 var normalize = function normalize(tokens, charset) {
   var table = {
     charset: charset,
@@ -1576,11 +1587,11 @@ var normalize = function normalize(tokens, charset) {
   var msgctxt;
   for (var i = 0, len = tokens.length; i < len; i++) {
     msgctxt = tokens[i].msgctxt || '';
-    if (!table.translations[msgctxt]) table.translations[msgctxt] = {};
+    if (!hasOwn(table.translations, msgctxt)) safeSet(table.translations, msgctxt, {});
     if (!table.headers && !msgctxt && !tokens[i].msgid) {
       table.headers = parseHeader(tokens[i].msgstr[0]);
     }
-    table.translations[msgctxt][tokens[i].msgid] = tokens[i];
+    safeSet(table.translations[msgctxt], tokens[i].msgid, tokens[i]);
   }
   return table;
 };

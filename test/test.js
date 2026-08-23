@@ -29,6 +29,21 @@ test('po2i18next', (fn) => () => {
 })
 
 describe('prototype pollution', () => {
+  test('po2js', (fn) => () => {
+    const unsafeCtx = ['__proto__', 'constructor', 'prototype']
+    unsafeCtx.forEach((ctx) => {
+      delete Object.prototype.gcPolluted
+      delete Object.gcPolluted
+      const res = fn(`msgctxt "${ctx}"\nmsgid "gcPolluted"\nmsgstr "polluted"\n`)
+      expect({}.gcPolluted).to.be(undefined)
+      expect(Object.prototype.gcPolluted).to.be(undefined)
+      expect(Object.gcPolluted).to.be(undefined)
+      expect(res.translations[ctx].gcPolluted.msgstr).to.eql(['polluted'])
+      delete Object.prototype.gcPolluted
+      delete Object.gcPolluted
+    })
+  })
+
   test('js2i18next', (fn) => () => {
     const unsafeIds = ['__proto__##gcPolluted', '__proto__', 'constructor##prototype##gcPolluted', 'a##constructor##gcPolluted']
     unsafeIds.forEach((id) => {

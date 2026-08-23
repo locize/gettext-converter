@@ -1,3 +1,7 @@
+### 1.3.4
+
+- security: prevent prototype pollution in the PO parser via unsafe `msgctxt` (`__proto__`, `constructor`) ([GHSA-3qx4-pp8q-43c4](https://github.com/locize/gettext-converter/security/advisories/GHSA-3qx4-pp8q-43c4), reported by [@ibrahimaljaafreh](https://github.com/ibrahimaljaafreh))
+
 ### 1.3.3
 
 - security: prevent prototype pollution in `js2i18next()` via unsafe translation keys (`__proto__`, `constructor`, `prototype`) ([#15](https://github.com/locize/gettext-converter/issues/15), reported by [@Dremig](https://github.com/Dremig))
