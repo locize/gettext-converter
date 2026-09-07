@@ -95,6 +95,21 @@ const res = i18next2po('en', i18nextJs)
 // res is like po
 ```
 
+### fuzzy entries
+
+`i18next2po` / `i18next2js` flag the entries of the given keys with `#, fuzzy` (`fuzzy` takes an array, a `Set` or a `(key) => boolean`; a plural or context entry is flagged when any of its forms is listed). `po2i18next` / `js2i18next` with `fuzzy: true` return `{ resources, fuzzy }` instead of the resources alone: `fuzzy` lists the i18next keys (paths joined with `.`) of the fuzzy entries (with `skipUntranslated` fuzzy entries are dropped instead, as before):
+
+```js
+const po = i18next2po('en', { greeting: 'hi', bye: 'bye' }, { fuzzy: ['bye'] })
+// ...
+// #, fuzzy
+// msgid "bye"
+// msgstr "bye"
+
+const { resources, fuzzy } = po2i18next(po, { fuzzy: true })
+// resources => { greeting: 'hi', bye: 'bye' }, fuzzy => ['bye']
+```
+
 ### i18next json format v4 support
 
 ```javascript

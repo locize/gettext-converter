@@ -160,3 +160,24 @@ describe('nested array of objects', () => {
     })
   })
 })
+
+describe('fuzzy', () => {
+  const conv = require('../')
+  it('flags the given keys on the way out and reports them on the way in', () => {
+    const po = conv.i18next2po('en', { greeting: 'hi', bye: 'bye', nested: { deep: 'deep' }, item_one: 'one item', item_other: 'items' }, { fuzzy: ['bye', 'nested.deep', 'item_one'], noDate: true, compatibilityJSON: 'v4' })
+    expect(po).to.contain('#, fuzzy\nmsgid "bye"')
+    expect(po).to.contain('#, fuzzy\nmsgid "nested##deep"') // nested keys use the ## msgid separator
+    expect(po).to.contain('#, fuzzy\nmsgid "item"')
+    expect(po).to.not.contain('#, fuzzy\nmsgid "greeting"')
+    const { resources, fuzzy } = conv.po2i18next(po, { fuzzy: true, compatibilityJSON: 'v4' })
+    expect(resources).to.eql({ greeting: 'hi', bye: 'bye', nested: { deep: 'deep' }, item_one: 'one item', item_other: 'items' })
+    expect(fuzzy.sort()).to.eql(['bye', 'item_one', 'item_other', 'nested.deep'])
+  })
+  it('accepts a Set and a function, and returns plain resources without the option', () => {
+    const poSet = conv.i18next2po('en', { a: 'A', b: 'B' }, { fuzzy: new Set(['a']), noDate: true })
+    expect(poSet).to.contain('#, fuzzy\nmsgid "a"')
+    const poFn = conv.i18next2po('en', { a: 'A', b: 'B' }, { fuzzy: (k) => k === 'b', noDate: true })
+    expect(poFn).to.contain('#, fuzzy\nmsgid "b"')
+    expect(conv.po2i18next(poFn)).to.eql({ a: 'A', b: 'B' })
+  })
+})

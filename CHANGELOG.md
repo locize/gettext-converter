@@ -1,3 +1,7 @@
+### 1.4.0
+
+- feat: `#, fuzzy` round trip. `i18next2po` / `i18next2js` take `fuzzy` (the keys to flag: an array, a `Set` or a `(key) => boolean`; plural and context forms and nested keys are matched), `po2i18next` / `js2i18next` with `fuzzy: true` return `{ resources, fuzzy }` (the resources as before plus the keys of the fuzzy entries)
+
 ### 1.3.4
 
 - security: prevent prototype pollution in the PO parser via unsafe `msgctxt` (`__proto__`, `constructor`) ([GHSA-3qx4-pp8q-43c4](https://github.com/locize/gettext-converter/security/advisories/GHSA-3qx4-pp8q-43c4), reported by [@ibrahimaljaafreh](https://github.com/ibrahimaljaafreh))

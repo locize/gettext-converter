@@ -623,6 +623,33 @@ var getPluralArray = function getPluralArray(locale, translation, plurals) {
   pArray.splice(getGettextPluralPosition(ext, translation.pluralNumber - 1), 0, translation.value);
   return pArray;
 };
+var PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other', 'plural', '0', '1', '2', '3', '4', '5'];
+var fuzzyMatcher = function fuzzyMatcher(options) {
+  var fuzzy = options.fuzzy;
+  if (!fuzzy) return function () {
+    return false;
+  };
+  var has = typeof fuzzy === 'function' ? function (k) {
+    return !!fuzzy(k);
+  } : fuzzy instanceof Set ? function (k) {
+    return fuzzy.has(k);
+  } : function (k) {
+    return Array.isArray(fuzzy) && fuzzy.indexOf(k) > -1;
+  };
+  var ctxSeparator = options.ctxSeparator || '_';
+  var keyseparator = options.keyseparator || '##';
+  return function (kv) {
+    var keys = kv.key.indexOf(keyseparator) > -1 ? [kv.key, kv.key.split(keyseparator).join('.')] : [kv.key];
+    var bases = kv.context ? keys.concat(keys.map(function (k) {
+      return "".concat(k).concat(ctxSeparator).concat(kv.context);
+    })) : keys;
+    return bases.some(function (b) {
+      return has(b) || (kv.plurals || kv.pluralNumber ? PLURAL_SUFFIXES.some(function (s) {
+        return has("".concat(b, "_").concat(s));
+      }) : false);
+    });
+  };
+};
 var parseGettext = function parseGettext(locale, data) {
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var out = {
@@ -639,6 +666,7 @@ var parseGettext = function parseGettext(locale, data) {
   var setLocaleAsLanguageHeader = (0, _options.getSetLocaleAsLanguageHeader)(options);
   var ext = plurals[locale.toLowerCase()] || plurals[locale.split(/_|-/)[0].toLowerCase()] || plurals.dev;
   var trans = {};
+  var isFuzzyEntry = fuzzyMatcher(options);
   out.headers['plural-forms'] = "nplurals=".concat(ext.numbers.length, "; plural=").concat(ext.plurals);
   if (!options.noDate) {
     out.headers['pot-creation-date'] = new Date().toISOString();
@@ -717,6 +745,12 @@ var parseGettext = function parseGettext(locale, data) {
           msgstr: (0, _arrify.default)(kv.value)
         };
       }
+    }
+    if (isFuzzyEntry(kv)) {
+      var entry = trans[kv.context][options.keyasareference ? kv.value : kv.key];
+      if (entry) entry.comments = Object.assign({}, entry.comments, {
+        flag: 'fuzzy'
+      });
     }
   });
   delkeys.forEach(function (a) {
@@ -917,6 +951,7 @@ function _default(js) {
     });
   }
   var json = {};
+  var fuzzyKeys = options.fuzzy === true ? [] : null;
   var separator = options.keyseparator || '##';
   var ctxSeparator = options.ctxSeparator || '_';
   var locale = options.locale || js.headers && js.headers.Language || 'en';
@@ -925,6 +960,7 @@ function _default(js) {
     Object.keys(context).forEach(function (key) {
       var targetKey = key;
       var appendTo = json;
+      var keyPath = [];
       if (key.length === 0) {
         delete context[key];
         return;
@@ -939,6 +975,7 @@ function _default(js) {
           delete context[key];
           return;
         }
+        keyPath = _keys.slice(0, _keys.length - 1);
         var x = 0;
         while (_keys[x] !== undefined && _keys[x] !== null) {
           if (x < _keys.length - 1) {
@@ -962,8 +999,17 @@ function _default(js) {
       }
       var newValues = getGettextValues(context[key], locale, targetKey, options);
       Object.assign(appendTo, newValues);
+      if (fuzzyKeys && isFuzzy(context[key])) {
+        Object.keys(newValues).forEach(function (k) {
+          return fuzzyKeys.push(keyPath.concat(k).join('.'));
+        });
+      }
     });
   });
+  if (fuzzyKeys) return {
+    resources: json,
+    fuzzy: fuzzyKeys
+  };
   return json;
 }
 module.exports = exports.default;
