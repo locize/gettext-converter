@@ -1,3 +1,7 @@
+### 1.4.1
+
+- fix: with `persistMsgIdPlural`, a plural entry kept no `msgctxt`: two plurals that differ only by their context (`msgctxt "cart"` / `msgctxt "list"` on the same `msgid` and `msgid_plural`) merged into one key in `po2i18next` / `js2i18next`. The context now stays on the key, before the plural suffix (`One item|#|{{count}} items<ctxSeparator>cart_plural`), where `i18next2po` reads it back. Without `persistMsgIdPlural`, or with `ignoreCtx`, nothing changes
+
 ### 1.4.0
 
 - feat: `#, fuzzy` round trip. `i18next2po` / `i18next2js` take `fuzzy` (the keys to flag: an array, a `Set` or a `(key) => boolean`; plural and context forms and nested keys are matched), `po2i18next` / `js2i18next` with `fuzzy: true` return `{ resources, fuzzy }` (the resources as before plus the keys of the fuzzy entries)

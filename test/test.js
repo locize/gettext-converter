@@ -181,3 +181,41 @@ describe('fuzzy', () => {
     expect(conv.po2i18next(poFn)).to.eql({ a: 'A', b: 'B' })
   })
 })
+
+describe('msgctxt with a separator that ordinary text never contains', () => {
+  const conv = require('../')
+  // U+0004 joins msgid and msgctxt, as gettext does in .mo files: entries that differ only by
+  // their context stay apart, plurals and "#, fuzzy" included, and come back as they were
+  const po = [
+    'msgid ""', 'msgstr ""', '"Content-Type: text/plain; charset=UTF-8\\n"', '"Plural-Forms: nplurals=2; plural=(n != 1);\\n"', '',
+    'msgctxt "menu"', 'msgid "Open"', 'msgstr "Öffnen"', '',
+    'msgid "Open"', 'msgstr "Öffnen (ohne)"', '',
+    'msgctxt "cart"', 'msgid "One item"', 'msgid_plural "{{count}} items"', 'msgstr[0] "Ein Artikel"', 'msgstr[1] "{{count}} Artikel"', '',
+    'msgctxt "list"', 'msgid "One item"', 'msgid_plural "{{count}} items"', 'msgstr[0] "Ein Eintrag"', 'msgstr[1] "{{count}} Einträge"', '',
+    '#, fuzzy', 'msgctxt "door state"', 'msgid "Open"', 'msgstr "Offen"', ''
+  ].join('\n')
+  const opt = { ctxSeparator: '\u0004', persistMsgIdPlural: true, fuzzy: true }
+
+  it('keeps every entry apart and round-trips', () => {
+    const { resources, fuzzy } = conv.po2i18next(po, opt)
+    expect(resources).to.eql({
+      Open: 'Öffnen (ohne)',
+      'Open\u0004menu': 'Öffnen',
+      'Open\u0004door state': 'Offen',
+      'One item|#|{{count}} items\u0004cart': 'Ein Artikel',
+      'One item|#|{{count}} items\u0004cart_plural': '{{count}} Artikel',
+      'One item|#|{{count}} items\u0004list': 'Ein Eintrag',
+      'One item|#|{{count}} items\u0004list_plural': '{{count}} Einträge'
+    })
+    expect(fuzzy).to.eql(['Open\u0004door state'])
+    const back = conv.i18next2po('de', resources, { ...opt, noDate: true, fuzzy })
+    expect(back).to.contain('msgctxt "cart"\nmsgid "One item"\nmsgid_plural "{{count}} items"\nmsgstr[0] "Ein Artikel"')
+    expect(back).to.contain('msgctxt "list"\nmsgid "One item"\nmsgid_plural "{{count}} items"\nmsgstr[0] "Ein Eintrag"')
+    expect(back).to.contain('#, fuzzy\nmsgctxt "door state"\nmsgid "Open"\nmsgstr "Offen"')
+    expect(conv.po2i18next(back, opt).resources).to.eql(resources)
+  })
+
+  it('still drops the context with ignoreCtx', () => {
+    expect(Object.keys(conv.po2i18next(po, { ...opt, ignoreCtx: true }).resources)).to.eql(['Open', 'One item|#|{{count}} items', 'One item|#|{{count}} items_plural'])
+  })
+})
