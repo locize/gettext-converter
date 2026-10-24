@@ -995,7 +995,7 @@ function _default(js) {
         var _context$key = context[key];
         var msgid = _context$key.msgid;
         var msgid_plural = _context$key.msgid_plural;
-        if (msgid_plural && msgid !== msgid_plural) targetKey = "".concat(msgid, "|#|").concat(msgid_plural);
+        if (msgid_plural && msgid !== msgid_plural) targetKey = "".concat(msgid, "|#|").concat(msgid_plural).concat(m !== '' && !options.ignoreCtx ? "".concat(ctxSeparator).concat(m) : '');
       }
       var newValues = getGettextValues(context[key], locale, targetKey, options);
       Object.assign(appendTo, newValues);
